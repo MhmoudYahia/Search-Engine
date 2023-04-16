@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -21,15 +22,16 @@ import org.jsoup.select.Elements;
 public class Crawl_Implement implements Runnable {
 	private HashSet<String> Vis;
 	private Queue<String>Seed;
+	AtomicInteger idx;
 	
 	public Crawl_Implement(String path) {
 		Vis=new HashSet<>();
 		Seed=new LinkedList<>();
+		idx=new AtomicInteger(0);
 		readSeed(path);
 	}
 	
 	public void StartCrawelling() {
-		long i=0;
 		String curLink;
 		Document doc=null;
 		List<String>childLinks=null;
@@ -69,7 +71,8 @@ public class Crawl_Implement implements Runnable {
 		}
 	}
 	}
-	private List<String> getLinks(Document doc) {
+	
+private List<String> getLinks(Document doc) {
 		List<String> links=new ArrayList<>();
 		Elements linksInside=doc.select("a[href]");
 		for(Element element: linksInside) {
@@ -81,9 +84,10 @@ public class Crawl_Implement implements Runnable {
 	
 	private void DownloadPage(Document doc) {
 		try {
-			BufferedWriter buff=new BufferedWriter(new FileWriter("./Files/"+doc.title().split(" ")[0]+".txt"));
+			BufferedWriter buff=new BufferedWriter(new FileWriter("./Files/"+idx.getAndSet(idx.intValue()+1)+".html"));
 			System.out.println(doc.baseUri());
-			buff.write(doc.text());
+			buff.write(doc.baseUri()+'\n');
+			buff.write(doc.html());
 			buff.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
