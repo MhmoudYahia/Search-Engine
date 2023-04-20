@@ -1,0 +1,9 @@
+.Results_Container{
+  max-width: 800px;
+  padding-left: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 30px;
+}

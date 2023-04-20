@@ -1,0 +1,14 @@
+.App {
+  font-family: 'Poppins', sans-serif;
+}
+
+[data-theme="dark"] {
+  color: #eee;
+  background-color: #333;
+}
+
+*{
+  margin: 0;
+  box-sizing: border-box;
+}
+

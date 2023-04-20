@@ -1,0 +1,39 @@
+.Home_Container{
+  display: flex;
+  height: 100%;
+  padding: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding-top: 190px;
+}
+.toggle-btn{
+  position: absolute;
+  left: 1px;
+  top: 1px;
+}
+.Home_content{
+  width: 100%;
+}
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo img{
+  display: flex;
+  width: 180px;
+}
+.logo h3{
+  text-align: center;
+  padding-top: 8px;
+  font-size: 24px;
+}
+.search_bar,.search_btn{
+  display: flex;
+  max-width: 500px;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  padding-top: 12px;
+}
