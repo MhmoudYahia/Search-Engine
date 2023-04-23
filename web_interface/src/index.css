@@ -1,12 +1,14 @@
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+  position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: auto;
   min-height: 100vh;
+  /* overflow: auto !important; */
 }
+ body{
+  height: 100%;
+ }
 #root{
   height: 100%;
+  /* overflow: auto !important; */
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

@@ -1,3 +1,10 @@
+.Results_page{
+padding-top: 120px;
+display: flex;
+flex-direction: column;
+gap: 50px;
+}
+
 .Results_Container{
   max-width: 800px;
   padding-left: 100px;
