@@ -1,0 +1,39 @@
+<html>
+ <head>
+  <meta name="robots" content="noindex">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+  !function(orgCode, propertyCode, dataSubjectTypeCodes){
+    var params = new URLSearchParams(window.location.search);
+    if (params.has('property')) {
+      propertyCode = params.get('property');
+    }
+
+  var e = document.createElement('script');
+  e.type = 'text/javascript';
+  e.src = 'https://global.ketchcdn.com/web/v2/config/' + orgCode + '/' + propertyCode + '/boot.js';
+  e.defer = e.async = !0;
+  document.getElementsByTagName('head')[0].appendChild(e);
+  window.semaphore = window.semaphore || [];
+  window.semaphore.push(['showPreferences', {
+  showRightsTab: false,
+  showConsentsTab: true,
+  dataSubjectTypeCodes: dataSubjectTypeCodes
+  }]);
+  }('foxnews', 'foxnews_web', ['consumer_fox_news_user', 'consumer_other', '']);
+  function experienceClosed(reason){
+  if (reason != 'willNotShow') {
+    if (document.referrer) {
+       window.location.assign(document.referrer);
+    } else {
+      window.location.assign('https://foxnews.com');
+    }
+  }
+}
+semaphore.push(['onHideExperience', experienceClosed]);
+  </script>
+ </head>
+ <body>
+ </body>
+</html>

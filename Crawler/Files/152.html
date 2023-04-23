@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="en-US" class="">
+ <head>
+  <script>
+if (window.reveal && window.reveal.company) {
+	var r = window.reveal;
+	window.clearbit_fmt = {
+		cb_traffic_type: r.type,
+		cb_company_name: r.company.name,
+		cb_industry_tags: r.company.tags.join(', '),
+		cb_industry_sector: r.company.category.sector,
+		cb_industry_group:  r.company.category.industryGroup,
+		cb_industry_name: r.company.category.industry,
+		cb_industry_sub: r.company.category.subIndustry,
+		cb_company_city: r.company.geo.city,
+		cb_company_state:r.company.geo.state,
+		cb_company_country: r.company.geo.country,
+		cb_alexa_us: r.company.metrics.alexaUsRank,
+		cb_alexa_global: r.company.metrics.alexaGlobalRank,
+		cb_size_employees: r.company.metrics.employees,
+		cb_size_range: r.company.metrics.employeesRange,
+		cb_size_annual_revenue: r.company.metrics.annualRevenue,
+		cb_size_est_revenue: r.company.metrics.estimatedAnnualRevenue,
+	}
+}
+
+window.optimizely_fmt = {
+	"type": "user",
+	"attributes": {
+		"visitor_uid" : "575b8179c8e4cfee769a908757eff204",
+		"visitor_type": "prospect",
+		"is_first_visit": false,
+		"traffic_type": "logged_out",	}
+}
+window.drift_fmt = {
+	"visitor_type": "prospect",
+	"is_first_visit": false,
+	"traffic_type": "logged_out",
+	"is_paid_plan": false,
+	"is_free_plan": false,
+	"is_ent_plan": false,
+}
+if (window.drift) {
+	window.drift.on('ready', function() {
+		window.drift.api.setUserAttributes(window.drift_fmt);
+	});
+}
+if (window.reveal && window.reveal.company) {
+	window.dataLayer = window.dataLayer || [];
+	window.dataLayer.push(window.clearbit_fmt);
+	window.dataLayer.push({event: 'Clearbit'});
+}
+if (window.reveal && window.reveal.company) {
+	for (var p in window.clearbit_fmt) {
+		if (window.clearbit_fmt.hasOwnProperty(p)) {
+			window.optimizely_fmt.attributes[p] = window.clearbit_fmt[p];
+		}
+	}
+}window.optimizely = window.optimizely || [];
+window.optimizely.push({'type':'optOut','isOptOut':false});
+window.optimizely.push(window.optimizely_fmt);</script>
+  <script src="https://d34u8crftukxnk.cloudfront.net/snippets/13778740109.js"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/webpack.manifest.998b2a6a14bfd4ae9f59.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script>window.ts_endpoint_url = "https:\/\/slack.com\/beacon\/timing";(function(e) {
+	var n=Date.now?Date.now():+new Date,r=e.performance||{},t=[],a={},i=function(e,n){for(var r=0,a=t.length,i=[];a>r;r++)t[r][e]==n&&i.push(t[r]);return i},o=function(e,n){for(var r,a=t.length;a--;)r=t[a],r.entryType!=e||void 0!==n&&r.name!=n||t.splice(a,1)};r.now||(r.now=r.webkitNow||r.mozNow||r.msNow||function(){return(Date.now?Date.now():+new Date)-n}),r.mark||(r.mark=r.webkitMark||function(e){var n={name:e,entryType:"mark",startTime:r.now(),duration:0};t.push(n),a[e]=n}),r.measure||(r.measure=r.webkitMeasure||function(e,n,r){n=a[n].startTime,r=a[r].startTime,t.push({name:e,entryType:"measure",startTime:n,duration:r-n})}),r.getEntriesByType||(r.getEntriesByType=r.webkitGetEntriesByType||function(e){return i("entryType",e)}),r.getEntriesByName||(r.getEntriesByName=r.webkitGetEntriesByName||function(e){return i("name",e)}),r.clearMarks||(r.clearMarks=r.webkitClearMarks||function(e){o("mark",e)}),r.clearMeasures||(r.clearMeasures=r.webkitClearMeasures||function(e){o("measure",e)}),e.performance=r,"function"==typeof define&&(define.amd||define.ajs)&&define("performance",[],function(){return r}) // eslint-disable-line
+})(window);</script>
+  <script>
+
+(function () {
+	
+	window.TSMark = function (mark_label) {
+		if (!window.performance || !window.performance.mark) return;
+		performance.mark(mark_label);
+	};
+	window.TSMark('start_load');
+
+	
+	window.TSMeasureAndBeacon = function (measure_label, start_mark_label) {
+		if (!window.performance || !window.performance.mark || !window.performance.measure) {
+			return;
+		}
+
+		performance.mark(start_mark_label + '_end');
+
+		try {
+			performance.measure(measure_label, start_mark_label, start_mark_label + '_end');
+			window.TSBeacon(measure_label, performance.getEntriesByName(measure_label)[0].duration);
+		} catch (e) {
+			
+		}
+	};
+
+	
+	if ('sendBeacon' in navigator) {
+		window.TSBeacon = function (label, value) {
+			var endpoint_url = window.ts_endpoint_url || 'https://slack.com/beacon/timing';
+			navigator.sendBeacon(
+				endpoint_url + '?data=' + encodeURIComponent(label + ':' + value),
+				''
+			);
+		};
+	} else {
+		window.TSBeacon = function (label, value) {
+			var endpoint_url = window.ts_endpoint_url || 'https://slack.com/beacon/timing';
+			new Image().src = endpoint_url + '?data=' + encodeURIComponent(label + ':' + value);
+		};
+	}
+})();
+</script>
+  <script>window.TSMark('step_load');</script>
+  <noscript>
+   <meta http-equiv="refresh" content="0; URL=&quot;\/apps\/A013AUF6VMG-fox-news?nojsmode=1&quot;">
+  </noscript>
+  <script type="text/javascript">var safe_hosts = ['app.optimizely.com', 'tinyspeck.dev.slack.com'];
+
+if (self !== top && safe_hosts.indexOf(top.location.host) === -1) {
+	window.document.write(
+		'\u003Cstyle>body * {display:none !important;}\u003C/style>\u003Ca href="#" onclick=' +
+			'"top.location.href=window.location.href" style="display:block !important;padding:10px">Go to Slack.com\u003C/a>'
+	);
+}
+
+(function() {
+	var timer;
+	if (self !== top && safe_hosts.indexOf(top.location.host) === -1) {
+		timer = window.setInterval(function() {
+			if (window) {
+				try {
+					var pageEl = document.getElementById('page');
+					var clientEl = document.getElementById('client-ui');
+					var sectionEls = document.querySelectorAll('nav, header, section');
+
+					pageEl.parentNode.removeChild(pageEl);
+					clientEl.parentNode.removeChild(clientEl);
+					for (var i = 0; i < sectionEls.length; i++) {
+						sectionEls[i].parentNode.removeChild(sectionEls[i]);
+					}
+					window.TS = null;
+					window.TD = null;
+					window.clearInterval(timer);
+				} catch (e) {}	
+			}
+		}, 200);
+	}
+})();</script>
+  <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-document-language="true" data-domain-script="3bcd90cf-1e32-46d7-adbd-634f66b65b7d">window.OneTrustLoaded = true;</script>
+  <script>window.OneTrustLoaded = true;</script>
+  <script>
+
+function bootDrift() {
+	if (window.drift_loaded) return;
+	if (!window.OnetrustActiveGroups || false) {
+		window.drift_loaded = true;
+		setTimeout(
+			function() {
+			window.generateNewContext = () => {
+					return {
+						window: {
+							location: {
+								hash: window.location.hash,
+								host: window.location.host,
+								hostname: window.location.hostname,
+								href: window.location.href,
+								origin: window.location.origin,
+								pathname: window.location.pathname,
+								port: window.location.port,
+								protocol: window.location.protocol,
+								search: window.location.search,
+							},
+							navigator: {
+								language: window.navigator.language,
+								browserLanguage: window.navigator.browserLanguage,
+								userAgent: window.navigator.userAgent,
+							},
+							innerHeight: window.innerHeight,
+							innerWidth: window.innerWidth,
+						},
+						document: {
+							title: document.title,
+							referrer: document.referrer,
+						},
+					};
+				};
+				window.addEventListener("resize", () => {
+					const driftiframe = document.getElementById("drift-iframe");
+					if (!driftiframe) return;
+					driftiframe.contentWindow.postMessage({type: "driftUpdateContext", data: generateNewContext()}, "*");
+				});
+				window.addEventListener("scroll", (event) => {
+					const driftiframe = document.getElementById("drift-iframe");
+					if (!driftiframe) return;
+					driftiframe.contentWindow.postMessage({type: "driftParentScroll", data: {scroll: true}, target: "drift.parentScroll"}, "*");
+				});
+				window.addEventListener("message", function (event) {
+					const driftiframe = document.getElementById("drift-iframe");
+					if (!driftiframe) return;
+					if (!driftiframe.contentWindow && event.source === driftiframe.contentWindow) return;
+					// on startup - pass created context into iframe
+					var message = event.data;
+					if (message.type === "driftIframeReady") {
+						driftiframe.contentWindow.postMessage({type: "driftSetContext", data: generateNewContext()}, "*");
+					}
+					// on widget size change - apply new size / positioning to iframe
+					if (message.type === "driftIframeResize") {
+						var styles = message.data.styles;
+						for (var key in styles) {
+							if (!styles.hasOwnProperty(key)) {
+								continue;
+							}
+							driftiframe.style.setProperty(key, styles[key]);
+						}
+					}
+				});
+			},
+		0);
+	}
+}
+function OptanonWrapper() {
+	window.dataLayer.push({'event': 'OneTrustReady'});
+	if (!Optanon.GetDomainData().ShowAlertNotice || false) {
+		bootDrift();
+		const bottomBannerEl = document.querySelector('.c-announcement-banner-bottom');
+		if (bottomBannerEl !== null) {
+			bottomBannerEl.classList.remove('c-announcement-banner-bottom-invisible');
+		}
+
+	}
+	Optanon.OnConsentChanged(function() {
+		bootDrift();
+		const bottomBannerEl = document.querySelector('.c-announcement-banner-bottom');
+		if (bottomBannerEl !== null) {
+			bottomBannerEl.classList.remove('c-announcement-banner-bottom-invisible');
+		}
+	});
+}</script>
+  <meta name="facebook-domain-verification" content="chiwsajpoybn2cnqyj9w8mvrey56m0">
+  <script type="text/javascript">
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+	'gtm.start': Date.now(),
+	'event' : 'gtm.js',
+	'AnalyticsActiveGroups' : ",1,2,3,4,",
+	'policy_ga_only' : false,
+});
+var firstScript = document.getElementsByTagName('script')[0];
+var thisScript = document.createElement('script');
+thisScript.async = true;
+thisScript.src = '//www.googletagmanager.com/gtm.js?id=GTM-KH2LPK';
+firstScript.parentNode.insertBefore(thisScript, firstScript);
+</script>
+  <script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(e) {
+	var gtmDataLayer = window.dataLayer || [];
+	var gtmTags = document.querySelectorAll('*[data-gtm-click]');
+	var gtmClickHandler = function(c) {
+		var gtm_events = this.getAttribute('data-gtm-click');
+		if (!gtm_events) return;
+		var gtm_events_arr = gtm_events.split(",");
+		for(var e=0; e < gtm_events_arr.length; e++) {
+			var ev = gtm_events_arr[e].trim();
+			gtmDataLayer.push({ 'event': ev });
+		}
+	};
+	for(var g=0; g < gtmTags.length; g++){
+		var elem = gtmTags[g];
+		elem.addEventListener('click', gtmClickHandler);
+	}
+});
+</script>
+  <script type="text/javascript">
+(function(e,c,b,f,d,g,a){e.SlackBeaconObject=d;
+e[d]=e[d]||function(){(e[d].q=e[d].q||[]).push([1*new Date(),arguments])};
+e[d].l=1*new Date();g=c.createElement(b);a=c.getElementsByTagName(b)[0];
+g.async=1;g.src=f;a.parentNode.insertBefore(g,a)
+})(window,document,"script","https://a.slack-edge.com/bv1-10/slack_beacon.a9d4f78a43abd6d9495d.min.js","sb");
+window.sb('set', 'token', '3307f436963e02d4f9eb85ce5159744c');
+window.sb('track', 'pageview');
+</script>
+  <meta name="referrer" content="no-referrer">
+  <meta name="superfish" content="nofish">
+  <script type="text/javascript">var TS_last_log_date = null;
+var TSMakeLogDate = function() {
+	var date = new Date();
+
+	var y = date.getFullYear();
+	var mo = date.getMonth()+1;
+	var d = date.getDate();
+
+	var time = {
+	  h: date.getHours(),
+	  mi: date.getMinutes(),
+	  s: date.getSeconds(),
+	  ms: date.getMilliseconds()
+	};
+
+	Object.keys(time).map(function(moment, index) {
+		if (moment == 'ms') {
+			if (time[moment] < 10) {
+				time[moment] = time[moment]+'00';
+			} else if (time[moment] < 100) {
+				time[moment] = time[moment]+'0';
+			}
+		} else if (time[moment] < 10) {
+			time[moment] = '0' + time[moment];
+		}
+	});
+
+	var str = y + '/' + mo + '/' + d + ' ' + time.h + ':' + time.mi + ':' + time.s + '.' + time.ms;
+	if (TS_last_log_date) {
+		var diff = date-TS_last_log_date;
+		//str+= ' ('+diff+'ms)';
+	}
+	TS_last_log_date = date;
+	return str+' ';
+}
+
+var parseDeepLinkRequest = function(code) {
+	var m = code.match(/"id":"([CDG][A-Z0-9]{8,})"/);
+	var id = m ? m[1] : null;
+
+	m = code.match(/"team":"(T[A-Z0-9]{8,})"/);
+	var team = m ? m[1] : null;
+
+	m = code.match(/"message":"([0-9]+\.[0-9]+)"/);
+	var message = m ? m[1] : null;
+
+	return { id: id, team: team, message: message };
+}
+
+if ('rendererEvalAsync' in window) {
+	var origRendererEvalAsync = window.rendererEvalAsync;
+	window.rendererEvalAsync = function(blob) {
+		try {
+			var data = JSON.parse(decodeURIComponent(atob(blob)));
+			if (data.code.match(/handleDeepLink/)) {
+				var request = parseDeepLinkRequest(data.code);
+				if (!request.id || !request.team || !request.message) return;
+
+				request.cmd = 'channel';
+				TSSSB.handleDeepLinkWithArgs(JSON.stringify(request));
+				return;
+			} else {
+				origRendererEvalAsync(blob);
+			}
+		} catch (e) {
+		}
+	}
+}</script>
+  <script type="text/javascript">var TSSSB = {
+	call: function() {
+		return false;
+	}
+};</script>
+  <title>Fox News | Slack App Directory</title>
+  <meta name="author" content="Slack">
+  <meta name="description" content="Fox News delivers breaking news 24/7 to you on Slack. Subscribe to the Fox News app to stay up-to-date on today's top stories.
+
+For more headlines, go to FoxNews.com and FoxBusiness.com
+Follow Fox ">
+  <link href="https://a.slack-edge.com/f3592c3/style/rollup-slack_kit_legacy_adapters.css" rel="stylesheet" type="text/css" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null" crossorigin="anonymous">
+  <link href="https://a.slack-edge.com/b30da12/style/rollup-app_directory.css" rel="stylesheet" type="text/css" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null" crossorigin="anonymous">
+  <link href="https://a.slack-edge.com/bv1-10/modern.vendor.d6333cf.min.css" rel="stylesheet" type="text/css" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null" crossorigin="anonymous">
+  <link href="https://a.slack-edge.com/bv1-10/application.3984633.min.css" rel="stylesheet" type="text/css" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null" crossorigin="anonymous">
+  <link href="https://a.slack-edge.com/bv1-10/app-directory.d9a850f.min.css" rel="stylesheet" type="text/css" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null" crossorigin="anonymous">
+  <link href="https://a.slack-edge.com/0b9d2fc/style/rollup-slack_kit_helpers.css" rel="stylesheet" id="slack_kit_helpers_stylesheet" type="text/css" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null" crossorigin="anonymous">
+  <link href="https://a.slack-edge.com/d5fba4c/marketing/style/onetrust/onetrust_banner.css" rel="stylesheet" type="text/css" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null" crossorigin="anonymous">
+  <link href="https://a.slack-edge.com/css/v5/style/page_atlassian_promo_banner.1a59cf5a0e644570def692ffd14d3df009ccc0f1.css" rel="stylesheet" type="text/css" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null" crossorigin="anonymous">
+  <link href="https://a.slack-edge.com/e06451a/style/libs/lato-2-compressed.css" rel="stylesheet" type="text/css" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null" crossorigin="anonymous">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Slack">
+  <meta property="og:title" content="Fox News">
+  <meta property="og:image" content="https://a.slack-edge.com/80588/marketing/img/meta/slack_hash_256.png">
+  <meta property="og:description" content="Fox News delivers breaking news 24/7 to you on Slack. Subscribe to the Fox News app to stay up-to-date on today's top stories.
+
+For more headlines, go to FoxNews.com and FoxBusiness.com
+Follow Fox ">
+  <meta property="og:url" content="https://slack.com/apps/A013AUF6VMG-fox-news">
+  <link id="favicon" rel="shortcut icon" href="https://a.slack-edge.com/5f35cf0/img/icons/favicon-32-ua.png" sizes="16x16 32x32 48x48" type="image/png">
+ </head>
+ <body class="p-app_directory_app_detaildeprecated">
+  <script> var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0); if (w > 1440) document.querySelector('body').classList.add('widescreen');</script><input type="hidden" data-app="1" data-id="A013AUF6VMG" data-is-installed="false" data-is-slack-integration="false" data-is-directory-published="true" data-is-distributed="true"><input id="is_signed_in" type="hidden" value="false"><input id="user_can_manage_apps" type="hidden" value="false">
+  <div id="apps-page-app-element">
+   <header data-js="js-apps-header" class="">
+    <nav class="apps_nav top persistent display_flex justify_content_between large_left_padding large_right_padding">
+     <div class="display_flex align_items_center">
+      <a href="/apps" class="logo" title="Slack" data-qa="logo" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_logo"></a>
+     </div>
+     <div class="flex_one display_flex justify_content_center align_items_center">
+      <div class="page_apps_directory_home__search page_apps_directory_home__search--header search_input_container position_relative">
+       <form action="/apps/search" class="apps_search_form">
+        <label class="no_margin" for="apps_nav_search_input" aria-label="Search App Directory"></label><input name="q" id="apps_nav_search_input" type="text" class="apps_search_input apps_search_input__header search_input small no_bottom_margin" placeholder="Search App Directory" autocomplete="off" data-search="app_directory_header" disabled><i class="ts_icon ts_icon_search icon_search icon_search_input"></i><img class="icon_loading" src="https://a.slack-edge.com/80588/img/loading.gif">
+       </form>
+      </div>
+     </div>
+     <div class="menu_actions">
+      <ul class="small_left_margin">
+       <li><a href="/apps" class="active" data-qa="browse" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_browse">Browse</a></li>
+       <li><a href="/apps/manage" data-qa="configure" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_manage">Manage</a></li>
+       <li><a href="https://api.slack.com/" data-qa="build_your_own" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_build">Build</a></li>
+       <li><a data-gtm-click="optout_nav_signin" href="/signin?redir=/apps/A013AUF6VMG-fox-news" class="" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_sign_in">Sign in</a></li>
+       <li><a data-gtm-click="SignUp" href="/get-started#/create" class="btn btn_outline neutral_white_bg show_outline create_workspace" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=appdir_nav_create_workspace_loggedout">Create Workspace</a></li>
+      </ul>
+     </div>
+     <div class="mobile_menu_actions">
+      <h3 class="no_bottom_margin">
+       <ts-icon id="mobile_search_open" class="ts_icon_search very_small_top_margin small_right_margin"></ts-icon></h3>
+      <ul>
+       <li><a href="#" id="mobile_menu_open" class=" transparent_bg" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_mobile_menu_open">
+         <ts-icon class="ts_icon_grabby_patty"></ts-icon></a></li>
+      </ul>
+     </div>
+     <div id="mobile_search" class="hidden neutral_white_bg position_absolute full_width full_height display_flex align_items_center left_padding right_padding">
+      <h3 class="no_bottom_margin">
+       <ts-icon class="ts_icon_search very_small_top_margin right_margin"></ts-icon></h3>
+      <form action="/apps/search" class="flex_one apps_search_form">
+       <input name="q" type="text" class="mobile_search_input no_bottom_margin" placeholder="Search App Directory" autocomplete="off">
+      </form><ts-icon id="mobile_search_close" class="ts_icon_times_circle very_small_top_margin left_margin"></ts-icon>
+     </div>
+    </nav>
+    <div id="apps_alert" class="alert_page alert_warning is_ephemeral hidden">
+     <ts-icon class="ts_icon ts_icon_warning"></ts-icon><span class="error_msg">Hmm, that didn't work. Try again?</span>
+    </div>
+   </header>
+   <nav class="apps_nav mobile_menu cool_purple_bg">
+    <div class="mobile_menu_wrapper">
+     <div class="mobile_menu_header">
+      <a href="/apps" class="logo" title="Slack" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_logo"></a>
+      <h1 class="nav_title reset_letter_spacing black"><a href="/apps" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_title">App Directory</a></h1><a href="#" class="close" aria-label="close">
+       <ts-icon class="ts_icon ts_icon_times"></ts-icon></a>
+     </div>
+     <ul>
+      <li><a href="/apps" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_browse">Browse</a></li>
+      <li><a href="/apps/manage" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_manage">Manage</a></li>
+      <li><a href="https://api.slack.com/" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_build">Build</a></li>
+     </ul>
+     <div class="mobile_menu_footer">
+      <ul>
+       <li><a data-gtm-click="optout_nav_signin" class="mobile_menu_teams_list_link" href="https://slack.com/signin?redir=/apps/A013AUF6VMG-fox-news" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=nav_sign_in">
+         <ts-icon class="ts_icon small float_none team_icon ts_icon_plus default signup_icon"></ts-icon><span class="switcher_label">Sign in to another workspace</span></a></li>
+      </ul>
+     </div>
+    </div>
+   </nav>
+   <div id="page">
+    <div id="page_contents" data-qa="page_contents">
+     <div data-automount-component="PartnerPromotionBanner" data-automount-props="{&quot;appId&quot;:&quot;A013AUF6VMG&quot;,&quot;experimentAppdirPromotionBannerGroupTreatment&quot;:false}"></div>
+     <div class="margin_bottom_100">
+      <a href="/apps" class="display_flex">
+       <ts-icon class="ts_icon_chevron_medium_left"></ts-icon><span>Browse Apps</span></a>
+     </div>
+     <div class="p-wrapper">
+      <div>
+       <div class="app_icon_container align_center margin_bottom_125">
+        <img src="https://avatars.slack-edge.com/2020-05-28/1136096079735_dd68fea284b2319d1b2d_512.png" class="large_app_icon">
+       </div>
+       <div class="small_bottom_margin hidden p-app_info_install_buttons p-app_info--hide_on_tablet">
+        <a class="p-app_detail_btn c-button c-button--large full_width c-button--primary" href="/signin?redir=/apps/A013AUF6VMG" data-qa="manage-requests-button" data-js="sign_in">Sign In to install</a><a data-js="learn_more" href="https://www.foxnews.com/slack-app" class="p-app_detail_btn c-button c-button--large full_width c-button--outline margin_top_75">Learn More</a>
+       </div>
+       <div class="p-app_info--hide_on_tablet">
+        <div data-automount-component="AppDirectoryAdditionalInfo" data-automount-props="{&quot;appId&quot;:&quot;A013AUF6VMG&quot;,&quot;supportedLanguages&quot;:[&quot;English&quot;],&quot;pricing&quot;:&quot;Free&quot;,&quot;supportLink&quot;:&quot;https:\/\/help.foxnews.com\/hc\/en-us\/sections\/360008766774-Slack-App&quot;,&quot;devWebsiteLink&quot;:&quot;https:\/\/www.foxnews.com\/slack-app&quot;,&quot;supportEmail&quot;:&quot;contactus@foxnews.com&quot;,&quot;privacyPolicyLink&quot;:&quot;https:\/\/help.foxnews.com\/hc\/en-us\/articles\/360049193034&quot;,&quot;categories&quot;:[{&quot;id&quot;:257651584373,&quot;name&quot;:&quot;Media &amp; News&quot;,&quot;description&quot;:&quot;From breaking news to trends on social media, these apps will help your team stay in the loop on what matters to you most.&quot;,&quot;is_displayed&quot;:true,&quot;is_featured&quot;:false,&quot;display_order&quot;:455,&quot;slug&quot;:&quot;At7KK5H6AZ-media-news&quot;}],&quot;showReportApp&quot;:true,&quot;reportAppLink&quot;:&quot;\/help\/requests\/new?app_id=A013AUF6VMG&quot;,&quot;missionControlLink&quot;:&quot;&quot;,&quot;isSlackOwned&quot;:false,&quot;isGovSlack&quot;:false}"></div>
+       </div>
+      </div>
+      <div class="p-content">
+       <h2 class="p-app_info_title margin_bottom_150" data-qa="Fox News">Fox News</h2>
+       <div class="mobile_app_actions bottom_margin top_margin hidden p-app_info_install_buttons p-app_info--show_on_tablet">
+        <a class="p-app_detail_btn c-button c-button--large full_width c-button--primary" href="/signin?redir=/apps/A013AUF6VMG" data-qa="manage-requests-button" data-js="sign_in">Sign In to install</a><a data-js="learn_more" href="https://www.foxnews.com/slack-app" class="p-app_detail_btn c-button c-button--large full_width c-button--outline margin_top_75">Learn More</a>
+       </div>
+       <div class="p-app_info_loading medium_bottom_margin large_top_padding large_bottom_padding">
+        <div class="infinite_spinner infinite_spinner_medium">
+         <svg class="infinite_spinner_spinner infinite_spinner_fast" viewbox="0 0 100 100">
+          <circle class="infinite_spinner_bg" cx="50%" cy="50%" r="35"></circle><circle class="infinite_spinner_path infinite_spinner_blue" cx="50%" cy="50%" r="35"></circle>
+         </svg>
+         <svg class="infinite_spinner_spinner infinite_spinner_tail infinite_spinner_fast" viewbox="0 0 100 100">
+          <circle class="infinite_spinner_path infinite_spinner_blue" cx="50%" cy="50%" r="35"></circle>
+         </svg>
+        </div>
+       </div>
+       <div class="p-app_info medium_bottom_margin hidden">
+        <div></div>
+        <div role="tablist" id="js-app_info_tabs" class="p-app_info_tabs c-tabs__tab_menu c-tabs__tab_menu--plastic">
+         <a role="tab" id="js-more-info-tab" data-qa="more_info_tab" class="c-tabs__tab c-tabs__tab--plastic js-tab" href="#panel_more_info">Description</a> <a role="tab" id="js-features-tab" data-qa="features_tab" class="c-tabs__tab c-tabs__tab--plastic js-tab" href="#panel_features">Features</a><a role="tab" id="js-settings-tab" data-qa="settings_tab" class="c-tabs__tab c-tabs__tab--plastic js-tab" href="#panel_settings">Permissions</a><a role="tab" id="js-security-compliance-tab" data-qa="security_compliance_tab" class="c-tabs__tab c-tabs__tab--plastic js-tab" href="#panel_security_compliance">Security &amp; Compliance</a>
+        </div>
+        <div class="c-tabs__tab_panels">
+         <div role="tabpanel" class="c-tabs__tab_panel js-panel" id="panel_more_info">
+          <div data-automount-component="AppDirectoryCarousel" data-automount-props="{&quot;appId&quot;:&quot;A013AUF6VMG&quot;,&quot;images&quot;:[{&quot;id&quot;:&quot;1212260728067&quot;,&quot;image440&quot;:&quot;https:\/\/d3mhjf54oqinl2.cloudfront.net\/2020-06-29\/1212260728067_dc89d45f5a6053492706_440.png&quot;,&quot;image1000&quot;:&quot;https:\/\/d3mhjf54oqinl2.cloudfront.net\/2020-06-29\/1212260728067_dc89d45f5a6053492706_1000.png&quot;,&quot;image1600&quot;:&quot;https:\/\/d3mhjf54oqinl2.cloudfront.net\/2020-06-29\/1212260728067_dc89d45f5a6053492706_1600.png&quot;,&quot;imageOriginal&quot;:&quot;https:\/\/d3mhjf54oqinl2.cloudfront.net\/2020-06-29\/1212260728067_dc89d45f5a6053492706_original.png&quot;},{&quot;id&quot;:&quot;1212052900002&quot;,&quot;image440&quot;:&quot;https:\/\/d3mhjf54oqinl2.cloudfront.net\/2020-06-29\/1212052900002_94489b3beba238a97872_440.png&quot;,&quot;image1000&quot;:&quot;https:\/\/d3mhjf54oqinl2.cloudfront.net\/2020-06-29\/1212052900002_94489b3beba238a97872_1000.png&quot;,&quot;image1600&quot;:&quot;https:\/\/d3mhjf54oqinl2.cloudfront.net\/2020-06-29\/1212052900002_94489b3beba238a97872_1600.png&quot;,&quot;imageOriginal&quot;:&quot;https:\/\/d3mhjf54oqinl2.cloudfront.net\/2020-06-29\/1212052900002_94489b3beba238a97872_original.png&quot;},{&quot;id&quot;:&quot;1212261553299&quot;,&quot;image440&quot;:&quot;https:\/\/d3mhjf54oqinl2.cloudfront.net\/2020-06-29\/1212261553299_40984c6aa1db0acc16a0_440.png&quot;,&quot;image1000&quot;:&quot;https:\/\/d3mhjf54oqinl2.cloudfront.net\/2020-06-29\/1212261553299_40984c6aa1db0acc16a0_1000.png&quot;,&quot;image1600&quot;:&quot;https:\/\/d3mhjf54oqinl2.cloudfront.net\/2020-06-29\/1212261553299_40984c6aa1db0acc16a0_1600.png&quot;,&quot;imageOriginal&quot;:&quot;https:\/\/d3mhjf54oqinl2.cloudfront.net\/2020-06-29\/1212261553299_40984c6aa1db0acc16a0_original.png&quot;}],&quot;videoUrl&quot;:null,&quot;videoId&quot;:null,&quot;appName&quot;:&quot;Fox News&quot;}"></div>
+          <div class="p-app_description medium_top_margin">
+           <div class="medium_bottom_margin">
+            <div class="tsf_output emoji_replace_on_load">
+             Fox News delivers breaking news 24/7 to you on Slack. Subscribe to the Fox News app to stay up-to-date on today's top stories.<span class="para_break"></span>For more headlines, go to <a href="http://FoxNews.com">FoxNews.com</a> and <a href="http://FoxBusiness.com">FoxBusiness.com</a><br>
+             Follow Fox News on YouTube: <a href="http://youtube.com/foxnewschannel">http://youtube.com/foxnewschannel</a><br>
+             Follow Fox News on Facebook: <a href="https://www.facebook.com/FoxNews/">https://www.facebook.com/FoxNews/</a><br>
+             Follow Fox News on Instagram: <a href="https://www.instagram.com/foxnews/">https://www.instagram.com/foxnews/</a> <br>
+             Follow Fox News on Twitter: <a href="https://twitter.com/FoxNews">https://twitter.com/FoxNews</a><span class="para_break"></span>In order for the Fox News Slack app to work, Slack sends us some information, like your Slack user name, a Slack user ID, workspace name, and event info (e.g., subscribe/unsubscribe, clicks). We store this info in logs for a short period of time (e.g., for troubleshooting purposes.)<span class="para_break"></span>For more information about our privacy practices, you can find Fox News’ privacy policy at <a href="https://www.foxnews.com/privacy-policy">https://www.foxnews.com/privacy-policy</a>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div role="tabpanel" class="c-tabs__tab_panel js-panel" id="panel_features">
+          <div data-automount-component="AppDirectoryFeatures" data-automount-props="{&quot;appId&quot;:&quot;A013AUF6VMG&quot;,&quot;appName&quot;:&quot;Fox News&quot;,&quot;appIcon&quot;:&quot;https:\/\/avatars.slack-edge.com\/2020-05-28\/1136096079735_dd68fea284b2319d1b2d_32.png&quot;,&quot;globalShortcuts&quot;:[],&quot;messageShortcuts&quot;:[],&quot;workflowSteps&quot;:[],&quot;slashCommands&quot;:[{&quot;name&quot;:&quot;\/foxnews&quot;,&quot;url&quot;:&quot;https:\/\/slackapp.foxnews.com\/slackpost&quot;,&quot;desc&quot;:&quot;subscribe \/ unsubscribe&quot;,&quot;usage&quot;:&quot;subscribe unsubscribe&quot;,&quot;parse_full&quot;:false}],&quot;isCallsApp&quot;:false,&quot;isOrgReadyApp&quot;:false}"></div>
+         </div>
+         <div role="tabpanel" class="c-tabs__tab_panel js-panel" id="panel_settings">
+          <div id="status_msg" class="yolk_orange bold medium_top_margin right_margin align_right hidden"></div>
+          <div class="sk_white_bg rounded padding_200 margin_top_150">
+           <h3 class="p-detail_permissions_label bold">Permissions</h3>
+           <div data-automount-component="ScopeInfo" data-automount-props="{&quot;scopeInfo&quot;:{&quot;actions&quot;:{&quot;heading&quot;:&quot;Fox News will be able to do:&quot;,&quot;secondary_groups&quot;:{&quot;channel_actions&quot;:{&quot;heading&quot;:&quot;Perform actions in channels &amp; conversations&quot;,&quot;scopes_info&quot;:[{&quot;scopes&quot;:[&quot;chat:write&quot;],&quot;description&quot;:&quot;Send messages as @Fox News&quot;}]},&quot;workspace_actions&quot;:{&quot;heading&quot;:&quot;Perform actions in your workspace&quot;,&quot;scopes_info&quot;:[{&quot;scopes&quot;:[&quot;commands&quot;],&quot;description&quot;:&quot;Add shortcuts and\/or slash commands that people can use&quot;}]}}}},&quot;smallHeadings&quot;:true}">
+            <div class="p-scope_info">
+             <section class="p-scope_info__section">
+              <h3 class="p-scope_info__section_heading--small">Fox News will be able to do:</h3>
+              <div>
+               <div class="p-scope_info__group">
+                <div class="p-scope_info__group_icon">
+                 <i class="c-icon c-icon--comment-alt"></i>
+                </div>
+                <div class="p-scope_info__group_container">
+                 <button class="c-button-unstyled p-scope_info__group_toggle" type="button"><span class="p-scope_info__group_heading">Perform actions in channels &amp; conversations</span><i class="c-icon c-icon--caret-right c-icon--inline margin_left_75"></i></button>
+                </div>
+               </div>
+               <div class="p-scope_info__group">
+                <div class="p-scope_info__group_icon">
+                 <i class="c-icon c-icon--th-large"></i>
+                </div>
+                <div class="p-scope_info__group_container">
+                 <button class="c-button-unstyled p-scope_info__group_toggle" type="button"><span class="p-scope_info__group_heading">Perform actions in your workspace</span><i class="c-icon c-icon--caret-right c-icon--inline margin_left_75"></i></button>
+                </div>
+               </div>
+              </div>
+             </section>
+            </div>
+           </div>
+          </div>
+          <div class="clearfix"></div>
+         </div>
+         <div role="tabpanel" class="c-tabs__tab_panel js-panel" id="panel_security_compliance">
+          <div class="margin_top_150 sk_white_bg rounded">
+           <div class="padding_200 border_bottom">
+            <form method="POST" class="display_flex align_items_center justify_content_between full_width p-app_sec_comp__download_form">
+             <input type="hidden" name="crumb" value="s-1682227511-956e18460f2b789de31058d3eb86ca7acef8107c4727d5d8222eea94edda6161-☃"><input type="hidden" name="security_compliance_csv_download" value="1">
+             <div class="bold">
+              Download security and compliance information
+             </div>
+             <div class="p-app_sec_comp__download_cta">
+              <button type="submit" class="c-button c-button--small c-button--outline" data-js="app_security_compliance_csv">Download CSV</button>
+             </div>
+            </form>
+           </div>
+           <div class="padding_200 padding_bottom_100">
+            <p>Review the details to better understand this app’s security practices. To learn more about assessing apps for your workspace visit our <a href="/help/articles/360001670528-Security-recommendations-for-approving-apps">Help Center.</a></p>
+           </div>
+           <div class="padding_left_200 padding_right_200 padding_bottom_200">
+            <div class="padding_top_50  ">
+             <div class="display_flex cursor_pointer" data-toggle-visibility="general-content">
+              <span class="flex_one border_bottom padding_bottom_50"><span class="p-detail_permissions_label margin_bottom_100 bold">General</span>
+               <ts-icon class="p-detail_arrow_icon float_right ts_icon_caret_right"></ts-icon></span>
+             </div>
+             <div id="general-content" class="padding_top_100 padding_bottom_100 hidden">
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Developer
+               </div>
+               <div class="p-app_sec_comp__value">
+                Fox News LLC
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Company headquarters location
+               </div>
+               <div class="p-app_sec_comp__value">
+                United States
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Terms of service
+               </div>
+               <div class="p-app_sec_comp__value">
+                <span><span></span><a href="https://www.foxnews.com/terms-of-use">https://www.foxnews.com/terms-of-use</a><span></span></span>
+               </div>
+              </div>
+             </div>
+            </div>
+            <div class="padding_top_50 ">
+             <div class="display_flex cursor_pointer" data-toggle-visibility="privacy-content">
+              <span class="flex_one border_bottom padding_bottom_50"><span class="p-detail_permissions_label margin_bottom_100 bold">Privacy &amp; data governance</span>
+               <ts-icon class="p-detail_arrow_icon float_right ts_icon_caret_right"></ts-icon></span>
+             </div>
+             <div id="privacy-content" class="padding_top_100 padding_bottom_100 hidden">
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Data retention policy
+               </div>
+               <div class="p-app_sec_comp__value">
+                In order for the Fox News Slack app to work, Slack sends us some information, like your Slack user name, a Slack user ID, workspace name, and event info (e.g., subscribe/unsubscribe, clicks). We store this info in logs for a short period of time (e.g., for troubleshooting purposes.)
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Data archiving and removal policy
+               </div>
+               <div class="p-app_sec_comp__value">
+                In order for the Fox News Slack app to work, Slack sends us some information, like your Slack user name, a Slack user ID, workspace name, and event info (e.g., subscribe/unsubscribe, clicks). We store this info in logs for a short period of time (e.g., for troubleshooting purposes.)
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Data storage policy
+               </div>
+               <div class="p-app_sec_comp__value">
+                In order for the Fox News Slack app to work, Slack sends us some information, like your Slack user name, a Slack user ID, workspace name, and event info (e.g., subscribe/unsubscribe, clicks). We store this info in logs for a short period of time (e.g., for troubleshooting purposes.)
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Data hosting company
+               </div>
+               <div class="p-app_sec_comp__value">
+                AWS
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                App/service has sub-processors
+               </div>
+               <div class="p-app_sec_comp__value">
+                no
+               </div>
+              </div>
+             </div>
+            </div>
+            <div class="padding_top_50 ">
+             <div class="display_flex cursor_pointer" data-toggle-visibility="certifications-content">
+              <span class="flex_one border_bottom padding_bottom_50"><span class="p-detail_permissions_label margin_bottom_100 bold">Certifications &amp; compliance</span>
+               <ts-icon class="p-detail_arrow_icon float_right ts_icon_caret_right"></ts-icon></span>
+             </div>
+             <div id="certifications-content" class="padding_top_100 padding_bottom_100 hidden">
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Data deletion request procedure
+               </div>
+               <div class="p-app_sec_comp__value">
+                When someone requests Fox News to delete personal data, we notify them we delete any and all logs on a 21 day cycle.
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                HIPAA compliant
+               </div>
+               <div class="p-app_sec_comp__value">
+                no
+                <div class="p-app_sec_comp__disclaimer margin_top_50">
+                 While this app may offer HIPAA compliance, Slack does not have a business associate agreement with any third-party application providers, including those in the Slack App Directory, so you are responsible for validating the provider's compliance and executing an appropriate agreement before enabling.
+                </div>
+               </div>
+              </div>
+             </div>
+            </div>
+            <div class="padding_top_50 ">
+             <div class="display_flex cursor_pointer" data-toggle-visibility="security-content">
+              <span class="flex_one border_bottom padding_bottom_50"><span class="p-detail_permissions_label margin_bottom_100 bold">Security</span>
+               <ts-icon class="p-detail_arrow_icon float_right ts_icon_caret_right"></ts-icon></span>
+             </div>
+             <div id="security-content" class="padding_top_100 padding_bottom_100 hidden">
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Supports Security Assertion Markup Language (SAML)
+               </div>
+               <div class="p-app_sec_comp__value">
+                no
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Has a dedicated security team
+               </div>
+               <div class="p-app_sec_comp__value">
+                yes
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Contact for security issues
+               </div>
+               <div class="p-app_sec_comp__value">
+                infosec@fox.com
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Has a vulnerability disclosure program
+               </div>
+               <div class="p-app_sec_comp__value">
+                yes
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Vulnerability disclosure program URL
+               </div>
+               <div class="p-app_sec_comp__value">
+                <span><span></span><a href="https://www.foxcorporation.com/responsible-vulnerability-disclosure-policy/">https://www.foxcorporation.com/responsible-vulnerability-disclosure-policy/</a><span></span></span>
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Vulnerability disclosure program covers Slack app
+               </div>
+               <div class="p-app_sec_comp__value">
+                yes
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Has a bug bounty program
+               </div>
+               <div class="p-app_sec_comp__value">
+                no
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Requires third party authorization/connections
+               </div>
+               <div class="p-app_sec_comp__value">
+                no
+               </div>
+              </div>
+              <div class="display_flex flex_wrap padding_top_100 padding_bottom_100 ">
+               <div class="p-app_sec_comp__name bold">
+                Uses token rotation
+               </div>
+               <div class="p-app_sec_comp__value">
+                no
+               </div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+          <div class="margin_top_150 sk_white_bg rounded">
+           <div class="padding_200">
+            <div data-automount-component="AppDirectoryScopes" data-automount-props="{&quot;title&quot;:&quot;Scopes&quot;,&quot;appId&quot;:&quot;A013AUF6VMG&quot;,&quot;accordions&quot;:[{&quot;icon&quot;:&quot;bot&quot;,&quot;title&quot;:&quot;Fox News has 2 Bot Token Scopes&quot;,&quot;body&quot;:&quot;chat:write, commands&quot;,&quot;dataQa&quot;:&quot;bot-token-scopes-accordion&quot;}]}"></div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="p-app_info--show_on_tablet">
+        <div data-automount-component="AppDirectoryAdditionalInfo" data-automount-props="{&quot;appId&quot;:&quot;A013AUF6VMG&quot;,&quot;supportedLanguages&quot;:[&quot;English&quot;],&quot;pricing&quot;:&quot;Free&quot;,&quot;supportLink&quot;:&quot;https:\/\/help.foxnews.com\/hc\/en-us\/sections\/360008766774-Slack-App&quot;,&quot;devWebsiteLink&quot;:&quot;https:\/\/www.foxnews.com\/slack-app&quot;,&quot;supportEmail&quot;:&quot;contactus@foxnews.com&quot;,&quot;privacyPolicyLink&quot;:&quot;https:\/\/help.foxnews.com\/hc\/en-us\/articles\/360049193034&quot;,&quot;categories&quot;:[{&quot;id&quot;:257651584373,&quot;name&quot;:&quot;Media &amp; News&quot;,&quot;description&quot;:&quot;From breaking news to trends on social media, these apps will help your team stay in the loop on what matters to you most.&quot;,&quot;is_displayed&quot;:true,&quot;is_featured&quot;:false,&quot;display_order&quot;:455,&quot;slug&quot;:&quot;At7KK5H6AZ-media-news&quot;}],&quot;showReportApp&quot;:true,&quot;reportAppLink&quot;:&quot;\/help\/requests\/new?app_id=A013AUF6VMG&quot;,&quot;missionControlLink&quot;:&quot;&quot;,&quot;isSlackOwned&quot;:false,&quot;isGovSlack&quot;:false}"></div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div id="overlay"></div>
+   </div>
+  </div>
+  <div data-automount-component="ToastContainer"></div>
+  <div data-automount-component="ModalContainer"></div>
+  <footer data-qa="footer">
+   <section class="links">
+    <div class="grid">
+     <div class="col span_1_of_4 nav_col">
+      <ul>
+       <li class="cat_1">Using Slack</li>
+       <li><a href="/is" data-qa="product_footer" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_product">Product</a></li>
+       <li><a href="/enterprise" data-qa="enterprise_footer" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_enterprise">Enterprise</a></li>
+       <li><a href="/pricing?ui_step=28&amp;ui_element=5" data-qa="pricing_footer" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_pricing">Pricing</a></li>
+       <li><a href="https://get.slack.help/hc/en-us" data-qa="support_footer" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_support">Support</a></li>
+       <li><a href="/guides" data-qa="getting_started" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_getting_started">Slack Guides</a></li>
+       <li><a href="/apps" data-qa="app_directory" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_app_directory">App Directory</a></li>
+       <li><a href="https://api.slack.com/" data-qa="api" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_api">API</a></li>
+      </ul>
+     </div>
+     <div class="col span_1_of_4 nav_col">
+      <ul>
+       <li class="cat_2">Slack <ts-icon class="ts_icon_heart"></ts-icon></li>
+       <li><a href="/jobs" data-qa="jobs" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_jobs">Jobs</a></li>
+       <li><a href="/customers" data-qa="customers" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_customers">Customers</a></li>
+       <li><a href="/developers" data-qa="developers" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_developers">Developers</a></li>
+       <li><a href="/events" data-qa="events" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_events">Events</a></li>
+       <li><a href="https://slackhq.com/" data-qa="blog_footer" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_blog">Blog</a></li>
+      </ul>
+     </div>
+     <div class="col span_1_of_4 nav_col">
+      <ul>
+       <li class="cat_3">Legal</li>
+       <li><a href="/privacy-policy" data-qa="privacy" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_privacy">Privacy</a></li>
+       <li><a href="/security" data-qa="security" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_security">Security</a></li>
+       <li><a href="/terms-of-service" data-qa="tos" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_tos">Terms of Service</a></li>
+       <li><a href="/policies" data-qa="policies" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_policies">Policies</a></li>
+      </ul>
+     </div>
+     <div class="col span_1_of_4 nav_col">
+      <ul>
+       <li class="cat_4">Handy Links</li>
+       <li><a href="/downloads" data-qa="downloads" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_downloads">Download desktop app</a></li>
+       <li><a href="/downloads" data-qa="downloads_mobile" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_downloads_mobile">Download mobile app</a></li>
+       <li><a href="/brand-guidelines" data-qa="brand_guidelines" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_brand_guidelines">Brand Guidelines</a></li>
+       <li><a href="https://slackatwork.com" data-qa="slack_at_work" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_slack_at_work">Slack at Work</a></li>
+       <li><a href="https://status.slack.com/" data-qa="status" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_status">Status</a></li>
+      </ul>
+     </div>
+    </div>
+   </section>
+   <div class="footnote">
+    <section>
+     <a href="https://slack.com" aria-label="Slack homepage" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_slack_icon">
+      <ts-icon class="c-icon--slack" aria-hidden></ts-icon></a>
+     <ul>
+      <li><a href="/help/contact" data-qa="contact_us" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_contact_us">Contact Us</a></li>
+      <li><a href="https://twitter.com/SlackHQ" data-qa="slack_twitter" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_slack_twitter" aria-label="Slack on Twitter">
+        <ts-icon class="ts_icon_twitter" aria-hidden></ts-icon></a></li>
+      <li class="yt"><a href="https://www.youtube.com/channel/UCY3YECgeBcLCzIrFLP4gblw" data-qa="slack_youtube" data-clog-event="WEBSITE_CLICK" data-clog-params="click_target=footer_slack_youtube" aria-label="Slack on YouTube">
+        <ts-icon class="ts_icon_youtube" aria-hidden></ts-icon></a></li>
+     </ul>
+    </section>
+   </div>
+  </footer>
+  <script type="text/javascript">
+/**
+ * A placeholder function that the build script uses to
+ * replace file paths with their CDN versions.
+ *
+ * @param {String} file_path - File path
+ * @returns {String}
+ */
+function vvv(file_path) {
+		 var vvv_warning = 'You cannot use vvv on dynamic values. Please make sure you only pass in static file paths.'; if (window.TS && window.TS.warn) { window.TS.warn(vvv_warning); } else { console.warn(vvv_warning); } 
+	return file_path;
+}
+
+var cdn_url = "https:\/\/a.slack-edge.com";
+var vvv_abs_url = "https:\/\/slack.com\/";
+var inc_js_setup_data = {
+	emoji_sheets: {
+		apple: 'https://a.slack-edge.com/80588/img/emoji_2017_12_06/sheet_apple_64_indexed_256.png',
+		google: 'https://a.slack-edge.com/80588/img/emoji_2017_12_06/sheet_google_64_indexed_256.png',
+	},
+};
+</script>
+  <script type="text/javascript">	// common boot_data
+	var boot_data = {"api_url":"\/api\/","app":"web","user_id":null,"team_id":"T00000000","visitor_uid":"575b8179c8e4cfee769a908757eff204","no_login":true,"version_ts":1682142288,"version_uid":"63d05973f396951801e556f9b424fd3b5d39a671","cache_version":"v21-nomad","cache_ts_version":"v2-bunny","redir_domain":"slack-redir.net","cdn":{"edges":["https:\/\/a.slack-edge.com\/","https:\/\/b.slack-edge.com\/","https:\/\/a.slack-edge.com\/"],"avatars":"https:\/\/ca.slack-edge.com\/","downloads":"https:\/\/downloads.slack-edge.com\/","files":"https:\/\/slack-files.com\/"},"signin_url":"https:\/\/slack.com\/signin","abs_root_url":"https:\/\/slack.com\/","team_url":"","image_proxy_url":"https:\/\/slack-imgs.com\/","beacon_timing_url":"https:\/\/slack.com\/beacon\/timing","beacon_error_url":"https:\/\/slack.com\/beacon\/error","clog_url":"clog\/track\/","api_token":"","vvv_paths":{"lz_string":"https:\/\/a.slack-edge.com\/bv1-10\/lz-string-1.4.4.worker.8de1b00d670ff3dc706a0.js","codemirror":"https:\/\/a.slack-edge.com\/bv1-10\/codemirror.min.f5694357f36c33d95673.min.js","codemirror_addon_simple":"https:\/\/a.slack-edge.com\/bv1-10\/codemirror_simple.5988e1d3151c42102da4.min.js","codemirror_load":"https:\/\/a.slack-edge.com\/bv1-10\/codemirror_load.8d903ed94e0f60893b0d.min.js","codemirror_files":{"javascript":"https:\/\/a.slack-edge.com\/bv1-10\/codemirror_lang_javascript.1b155f0a6ed1a9a461ea.min.js"}},"notification_sounds":[{"value":"b2.mp3","label":"Ding","url":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/b2.mp3","url_ogg":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/b2.ogg"},{"value":"animal_stick.mp3","label":"Boing","url":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/animal_stick.mp3","url_ogg":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/animal_stick.ogg"},{"value":"been_tree.mp3","label":"Drop","url":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/been_tree.mp3","url_ogg":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/been_tree.ogg"},{"value":"complete_quest_requirement.mp3","label":"Ta-da","url":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/complete_quest_requirement.mp3","url_ogg":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/complete_quest_requirement.ogg"},{"value":"confirm_delivery.mp3","label":"Plink","url":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/confirm_delivery.mp3","url_ogg":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/confirm_delivery.ogg"},{"value":"flitterbug.mp3","label":"Wow","url":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/flitterbug.mp3","url_ogg":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/flitterbug.ogg"},{"value":"here_you_go_lighter.mp3","label":"Here you go","url":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/here_you_go_lighter.mp3","url_ogg":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/here_you_go_lighter.ogg"},{"value":"hi_flowers_hit.mp3","label":"Hi","url":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/hi_flowers_hit.mp3","url_ogg":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/hi_flowers_hit.ogg"},{"value":"knock_brush.mp3","label":"Knock Brush","url":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/knock_brush.mp3","url_ogg":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/knock_brush.ogg"},{"value":"save_and_checkout.mp3","label":"Whoa!","url":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/save_and_checkout.mp3","url_ogg":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/save_and_checkout.ogg"},{"value":"item_pickup.mp3","label":"Yoink","url":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/item_pickup.mp3","url_ogg":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/item_pickup.ogg"},{"value":"hummus.mp3","label":"Hummus","url":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/hummus.mp3","url_ogg":"https:\/\/a.slack-edge.com\/58f5096\/sounds\/push\/hummus.ogg"},{"value":"none","label":"None"}],"alert_sounds":[{"value":"frog.mp3","label":"Frog","url":"https:\/\/slack.global.ssl.fastly.net\/58f5096\/sounds\/frog.mp3"}],"call_sounds":[{"value":"call\/alert_v2.mp3","label":"Alert","url":"https:\/\/slack.global.ssl.fastly.net\/58f5096\/sounds\/call\/alert_v2.mp3"},{"value":"call\/incoming_ring_v2.mp3","label":"Incoming ring","url":"https:\/\/slack.global.ssl.fastly.net\/58f5096\/sounds\/call\/incoming_ring_v2.mp3"},{"value":"call\/outgoing_ring_v2.mp3","label":"Outgoing ring","url":"https:\/\/slack.global.ssl.fastly.net\/58f5096\/sounds\/call\/outgoing_ring_v2.mp3"},{"value":"call\/pop_v2.mp3","label":"Incoming reaction","url":"https:\/\/slack.global.ssl.fastly.net\/58f5096\/sounds\/call\/pop_v2.mp3"},{"value":"call\/they_left_call_v2.mp3","label":"They left call","url":"https:\/\/slack.global.ssl.fastly.net\/58f5096\/sounds\/call\/they_left_call_v2.mp3"},{"value":"call\/you_left_call_v2.mp3","label":"You left call","url":"https:\/\/slack.global.ssl.fastly.net\/58f5096\/sounds\/call\/you_left_call_v2.mp3"},{"value":"call\/they_joined_call_v2.mp3","label":"They joined call","url":"https:\/\/slack.global.ssl.fastly.net\/58f5096\/sounds\/call\/they_joined_call_v2.mp3"},{"value":"call\/you_joined_call_v2.mp3","label":"You joined call","url":"https:\/\/slack.global.ssl.fastly.net\/58f5096\/sounds\/call\/you_joined_call_v2.mp3"},{"value":"call\/confirmation_v2.mp3","label":"Confirmation","url":"https:\/\/slack.global.ssl.fastly.net\/58f5096\/sounds\/call\/confirmation_v2.mp3"}],"call_sounds_version":"v2","img":{"app_icon":"https:\/\/a.slack-edge.com\/80588\/img\/slack_growl_icon_vogue.png"},"page_needs_enterprise":false,"page_needs_custom_emoji":false,"is_deprecated_webclient_browser":true,"is_unsupported_webclient_browser":false,"default_tz":"America\/Los_Angeles","feature_builder_story_step":false,"feature_day2_share_modal":true,"feature_tinyspeck":false,"feature_olug_esc_channels_work":true,"feature_olug_remove_required_workspace_setting":false,"feature_data_table_in_org_level_user_groups":false,"feature_org_settings_m11n":false,"feature_deprecate_get_member_by_name":false,"feature_add_message_perf":false,"feature_amazon_a11y_custom_status_emoji":true,"feature_file_threads":true,"feature_broadcast_indicator":true,"feature_new_replies_after_bcast":true,"feature_sonic_emoji":true,"feature_attachments_inline":false,"feature_desktop_symptom_events":false,"feature_ent_admin_approved_apps_v2":true,"feature_shared_channels_multi_org_qa_limit_override":false,"feature_gdpr_user_join_tos":true,"feature_user_invite_tos_april_2018":true,"feature_enrich_fetch_team_user_from_db":true,"feature_channel_mgmt_message_count":false,"feature_whitelist_zendesk_chat_widget":false,"feature_use_imgproxy_resizing":true,"feature_boards_in_dev":false,"feature_disable_bk_in_thread":false,"feature_channel_exports":false,"feature_docs_mentions_and_channels":false,"feature_calls_survey_request_response":true,"feature_sidebar_theme_undo":true,"feature_allow_intra_word_formatting":true,"feature_slim_scrollbar":false,"feature_edge_upload_proxy_check":false,"feature_unread_counts_delay":true,"feature_legacy_file_upload_analytics":true,"feature_mpdm_limit_channel_creation":false,"feature_snippet_modes_i18n":false,"feature_ms_latest":true,"feature_rooms_join_url":false,"feature_custom_status_calendar_sync_copy":true,"feature_custom_status_calendar_sync":false,"feature_mask_undocumented_errors":false,"feature_app_views_reminders":true,"feature_reminders_org_shard":false,"feature_reminders_grid_migrations_org_shard":false,"feature_blocks_reminders_list":false,"feature_message_blocks":false,"feature_set_tz_automatically":true,"feature_confirm_clear_all_unreads_pref":true,"feature_block_mounts":true,"feature_attachments_v2":true,"feature_group_block":false,"feature_show_block_kit_in_share_dialogs":false,"feature_block_kit_range_datepicker":false,"feature_delete_app_homes_associated_with_deleted_service":true,"feature_soft_delete_app_homes_on_user_deactivation":false,"feature_beacon_js_errors":false,"feature_user_app_disable_speed_bump":true,"feature_apps_manage_permissions_scope_changes":true,"feature_reminder_cross_workspace":true,"feature_p2p":false,"feature_pages_example":false,"feature_iap1":false,"feature_ia_ga":true,"feature_ia_i18n":true,"feature_ia_member_profile":true,"feature_workspace_scim_management":false,"feature_desktop_reload_on_generic_error":true,"feature_desktop_extend_app_menu":false,"feature_desktop_restart_service_worker":false,"feature_desktop_system_notification_playback":false,"feature_bots_not_members":true,"feature_wta_stop_creation":true,"feature_platform_deprecations_fe":true,"feature_no_socket_mode":false,"feature_no_callback_id_edit":false,"feature_admin_email_change_confirm":false,"feature_channel_actions":true,"feature_screen_share_needs_aero":false,"feature_emoji_by_id":true,"feature_channel_invite_tokenization":true,"feature_email_notify":false,"feature_improved_email_rendering":true,"feature_mini_browser_translations":false,"feature_unfurl_metadata":false,"feature_paperclip_coachmark_experiments":true,"feature_plus_menu_add_apps_link":false,"feature_recent_files_omnipicker":false,"feature_recent_desktop_files":true,"feature_huddles_i18n":false,"feature_connect_deeplink":false,"feature_cea_allowlist_changes":false,"feature_cea_channel_management":true,"feature_cea_admin_controls":false,"feature_cea_allowlist_changes_plus":false,"feature_ia_layout":false,"feature_misc_ia_a11y_translations":false,"feature_threaded_call_block":false,"feature_enterprise_mobile_device_check":true,"feature_new_copy_for_identity_basic":false,"feature_trace_webapp_init":true,"feature_trace_jq_init":true,"feature_seven_days_email_update":true,"feature_uae_tax_id_collection":true,"feature_quebec_tax_id_collection":true,"feature_quebec_tax_assessment":true,"feature_georgia_tax_id_collection":true,"feature_georgia_tax_assessment":true,"feature_liechtenstein_tax_id_collection":true,"feature_liechtenstein_tax_assessment":true,"feature_ksa_tax_id_collection":true,"feature_indonesia_tax_change_notification":false,"feature_indonesia_tax_assessment":false,"feature_channel_sections":true,"feature_channel_sections_sidebar_behavior_ui":false,"feature_migrate_google_directory_apis":true,"feature_show_email_forwarded_by":false,"feature_download_finder_update":true,"feature_share_modal_dialog":true,"feature_block_files_esc":true,"feature_invite_new_error":true,"feature_mpdm_audience_expansion":true,"feature_idr_s3_files_sharded_backfill":true,"feature_xws_user_groups_selector":true,"feature_accessible_date_picker_select":false,"feature_remove_email_preview_link":true,"feature_desktop_enable_tslog":false,"feature_desktop_enable_sticky_notification_pref":false,"feature_ntlm_domain_approval_ui":false,"feature_email_determine_charset":true,"feature_windows7_deprecation":true,"feature_windows7_deprecation_modal":false,"feature_no_deprecation_in_updater":false,"feature_user_prefers_paused_animations":false,"feature_ez_subscribe_v_1_stage_0":false,"feature_pea_domain_allowlist":true,"feature_composer_auth_admin":false,"feature_ukraine_tax_id_collection":true,"feature_ukraine_tax_assessment":true,"feature_hermes_just_in_time_auth":true,"feature_taiwan_tax_id_collection":true,"feature_uk_eu_tax_id_collection":true,"feature_uk_eu_tax_assessment":true,"client_logs":{"0":{"numbers":["0"],"user_facing":false},"2":{"numbers":["2"],"user_facing":false},"4":{"numbers":["4"],"user_facing":false},"5":{"numbers":["5"],"user_facing":false},"23":{"numbers":["23"],"user_facing":false},"sounds":{"name":"sounds","numbers":["37"]},"37":{"name":"sounds","numbers":["37"],"user_facing":true},"47":{"numbers":["47"],"user_facing":false},"48":{"numbers":["48"],"user_facing":false},"Message History":{"name":"Message History","numbers":["58"]},"58":{"name":"Message History","numbers":["58"],"user_facing":true},"67":{"numbers":["67"],"user_facing":false},"72":{"numbers":["72"],"user_facing":false},"73":{"numbers":["73"],"user_facing":false},"82":{"numbers":["82"],"user_facing":false},"88":{"numbers":["88"],"user_facing":false},"91":{"numbers":["91"],"user_facing":false},"93":{"numbers":["93"],"user_facing":false},"96":{"numbers":["96"],"user_facing":false},"99":{"numbers":["99"],"user_facing":false},"Channel Marking (MS)":{"name":"Channel Marking (MS)","numbers":["141"]},"141":{"name":"Channel Marking (MS)","numbers":["141"],"user_facing":true},"Channel Marking (Client)":{"name":"Channel Marking (Client)","numbers":["142"]},"142":{"name":"Channel Marking (Client)","numbers":["142"],"user_facing":true},"365":{"numbers":["365"],"user_facing":false},"389":{"numbers":["389"],"user_facing":false},"438":{"numbers":["438"],"user_facing":false},"444":{"numbers":["444"],"user_facing":false},"481":{"numbers":["481"],"user_facing":false},"488":{"numbers":["488"],"user_facing":false},"529":{"numbers":["529"],"user_facing":false},"552":{"numbers":["552"],"user_facing":false},"dashboard":{"name":"dashboard","numbers":["666"]},"666":{"name":"dashboard","numbers":["666"],"user_facing":false},"667":{"numbers":["667"],"user_facing":false},"773":{"numbers":["773"],"user_facing":false},"777":{"numbers":["777"],"user_facing":false},"794":{"numbers":["794"],"user_facing":false},"Client Responsiveness":{"name":"Client Responsiveness","user_facing":false,"numbers":["808"]},"808":{"name":"Client Responsiveness","user_facing":false,"numbers":["808"]},"Message Pane Scrolling":{"name":"Message Pane Scrolling","numbers":["888"]},"888":{"name":"Message Pane Scrolling","numbers":["888"],"user_facing":true},"Unread banner and divider":{"name":"Unread banner and divider","numbers":["999"]},"999":{"name":"Unread banner and divider","numbers":["999"],"user_facing":true},"1000":{"numbers":["1000"],"user_facing":false},"Duplicate badges (desktop app icons)":{"name":"Duplicate badges (desktop app icons)","numbers":["1701"]},"1701":{"name":"Duplicate badges (desktop app icons)","numbers":["1701"],"user_facing":true},"Members":{"name":"Members","numbers":["1975"]},"1975":{"name":"Members","numbers":["1975"],"user_facing":true},"lazy loading":{"name":"lazy loading","numbers":["1989"]},"1989":{"name":"lazy loading","numbers":["1989"],"user_facing":true},"thin_channel_membership":{"name":"thin_channel_membership","numbers":["1990"]},"1990":{"name":"thin_channel_membership","numbers":["1990"],"user_facing":true},"stats":{"name":"stats","numbers":["1991"]},"1991":{"name":"stats","numbers":["1991"],"user_facing":true},"ms":{"name":"ms","numbers":["1996"]},"1996":{"name":"ms","numbers":["1996"],"user_facing":true},"shared_channels_connection":{"name":"shared_channels_connection","numbers":["1999"]},"1999":{"name":"shared_channels_connection","numbers":["1999"],"user_facing":false},"dnd":{"name":"dnd","numbers":["2002"]},"2002":{"name":"dnd","numbers":["2002"],"user_facing":true},"2003":{"numbers":["2003"],"user_facing":false},"Threads":{"name":"Threads","numbers":["2004"]},"2004":{"name":"Threads","numbers":["2004"],"user_facing":true},"2005":{"numbers":["2005"],"user_facing":false},"Reactions":{"name":"Reactions","numbers":["2006"]},"2006":{"name":"Reactions","numbers":["2006"],"user_facing":true},"TSSSB.focusTabAndSwitchToChannel":{"name":"TSSSB.focusTabAndSwitchToChannel","numbers":["2007"]},"2007":{"name":"TSSSB.focusTabAndSwitchToChannel","numbers":["2007"],"user_facing":false},"Presence Detection":{"name":"Presence Detection","numbers":["2017"]},"2017":{"name":"Presence Detection","numbers":["2017"],"user_facing":true},"mc_sibs":{"name":"mc_sibs","numbers":["9999"]},"9999":{"name":"mc_sibs","numbers":["9999"],"user_facing":false},"Member searching":{"name":"Member searching","numbers":["90211"]},"90211":{"name":"Member searching","numbers":["90211"],"user_facing":true},"98765":{"numbers":["98765"],"user_facing":false},"8675309":{"numbers":["8675309"],"user_facing":false}},"page_timing_label":"app_detail","other_accounts":{},"slack_connect_create_bots_count":0,"slack_connect_manage_bots_count":0};
+	boot_data.start_ms = Date.now();
+</script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/rollup-core_required_libs.38bbc20250c8878d412f.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/modern.vendor.02c465221a3c5112b005.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/application.cf2e81e8c55b30a25507.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/app-directory.cccd067edb147c358447.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/rollup-core_required_ts.a41267748a755c3d3d6c.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/TS.web.c48ff410f1129249e34a.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/rollup-core_web.0b8bce30da4000dff866.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/rollup-secondary_a_required.5b5afc2b8d24f22deaa6.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/rollup-secondary_b_required.77e5a777e2fef9198c10.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript">TS.boot(boot_data);</script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/TS.web.app_detail.a79e9476c745e3afbb59.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/jquery.typeahead.1975103d774921bd59d3.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/TS.ui.typeahead.985c8f65788f50dfcdfc.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/TS.web.apps.4b593c539c9820528978.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript" crossorigin="anonymous" src="https://a.slack-edge.com/bv1-10/footer.7f241f118fe48aac32a4.min.js" onload="window._cdn ? _cdn.ok(this, arguments) : null" onerror="window._cdn ? _cdn.failed(this, arguments) : null"></script>
+  <script type="text/javascript">
+boot_data.app_id = "A013AUF6VMG";
+boot_data.app_name = "Fox News";
+boot_data.team_name = "";
+boot_data.encoded_support_email = "&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#117;&#115;&#64;&#102;&#111;&#120;&#110;&#101;&#119;&#115;&#46;&#99;&#111;&#109;";
+boot_data.app_support_url = "https:\/\/help.foxnews.com\/hc\/en-us\/sections\/360008766774-Slack-App";
+boot_data.app_url = "https:\/\/www.foxnews.com\/slack-app";
+boot_data.app_icons = {"image_32":"https:\/\/avatars.slack-edge.com\/2020-05-28\/1136096079735_dd68fea284b2319d1b2d_32.png","image_36":"https:\/\/avatars.slack-edge.com\/2020-05-28\/1136096079735_dd68fea284b2319d1b2d_36.png","image_48":"https:\/\/avatars.slack-edge.com\/2020-05-28\/1136096079735_dd68fea284b2319d1b2d_48.png","image_64":"https:\/\/avatars.slack-edge.com\/2020-05-28\/1136096079735_dd68fea284b2319d1b2d_64.png","image_72":"https:\/\/avatars.slack-edge.com\/2020-05-28\/1136096079735_dd68fea284b2319d1b2d_72.png","image_96":"https:\/\/avatars.slack-edge.com\/2020-05-28\/1136096079735_dd68fea284b2319d1b2d_96.png","image_128":"https:\/\/avatars.slack-edge.com\/2020-05-28\/1136096079735_dd68fea284b2319d1b2d_128.png","image_192":"https:\/\/avatars.slack-edge.com\/2020-05-28\/1136096079735_dd68fea284b2319d1b2d_192.png","image_512":"https:\/\/avatars.slack-edge.com\/2020-05-28\/1136096079735_dd68fea284b2319d1b2d_512.png","image_1024":"https:\/\/avatars.slack-edge.com\/2020-05-28\/1136096079735_dd68fea284b2319d1b2d_1024.png","image_original":"https:\/\/avatars.slack-edge.com\/2020-05-28\/1136096079735_dd68fea284b2319d1b2d_original.png"};
+boot_data.app_whitelist_requests_require_comment_enabled = false;
+boot_data.is_app_installed = false;
+boot_data.is_xoxa_app = false;
+boot_data.hide_app_info_tab = false;
+boot_data.is_external_auth_app_and_user_has_not_authed = false;
+
+/* Prepare GTM event for install clicks */
+window.dataLayer = window.dataLayer || [];
+
+
+
+
+
+var _app_details = {
+	app_id: 1112967233730,
+	app_name: "Fox News",
+	is_slack_owned: false,
+};
+
+var _encoded_app_id = "A013AUF6VMG";
+var _is_installed = false;
+var _is_slack_integration = false;
+var _is_directory_published = true;
+var _is_distributed = true;
+
+/* Used for GTM/GA tracking */
+var _app_type;
+
+if (_is_slack_integration) {
+	_app_type = 'slack_owned';
+} else if (_is_directory_published) {
+	_app_type = 'api_app_in_directory';
+} else if (!_is_distributed) {
+	_app_type = 'internal_integration';
+} else {
+	_app_type = 'api_app_not_in_directory';
+}
+
+var _gtm_details = {
+	app_id: _encoded_app_id,
+	is_installed: _is_installed,
+	app_type: _app_type,
+};
+
+/* Track page load */
+TS.interop.clog.track('APP_DIRECTORY_APP_DETAIL', _app_details);
+
+window.dataLayer.push($.extend({
+	event: 'AppDirectoryApp_Detail',
+}, _gtm_details));
+
+/* Track help links */
+TS.interop.clog.trackClick('[data-js="action_app_support"]', 'APP_DIRECTORY_WEBSITE_CLICK', $.extend({'click_target':'action_app_support'}, _app_details));
+TS.interop.clog.trackClick('[data-js="action_app_privacy"]', 'APP_DIRECTORY_WEBSITE_CLICK', $.extend({'click_target':'action_app_privacy'}, _app_details));
+TS.interop.clog.trackClick('[data-js="action_report_app"]', 'APP_DIRECTORY_WEBSITE_CLICK', $.extend({'click_target':'action_report_app'}, _app_details));
+
+/* Track action links */
+$('[data-action_sign_in], [data-js="sign_in"]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		click_target: 'action_sign_in_to_install'
+	}, _app_details));
+
+	window.dataLayer.push($.extend({
+		event: 'AppDirectoryApp_SignInToInstall',
+	}, _gtm_details));
+});
+
+$('[data-js="action_request_app"]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		click_target: 'action_request_app'
+	}, _app_details));
+
+	window.dataLayer.push($.extend({
+		event: 'AppDirectoryApp_RequestInstall',
+	}, _gtm_details));
+});
+
+$('#action_install_app, [data-js="install"]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		click_target: 'action_app_install'
+	}, _app_details));
+
+	window.dataLayer.push($.extend({
+		event: 'AppDirectoryApp_Install',
+	}, _gtm_details));
+});
+
+$('#action_direct_install_app, [data-js="direct_install"]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		click_target: 'action_direct_install_app'
+	}, _app_details));
+
+	window.dataLayer.push($.extend({
+		event: 'AppDirectoryApp_DirectInstall',
+	}, _gtm_details));
+});
+
+// why are the properties on these different?
+// this click handler has been updated to use ui_context and combines
+// the previous way of logging with the newer, better way of logging.
+$('[data-action_blueprint_clone_install], [data-js="blueprin_clone_install"]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		contexts: {
+			ui_context: {
+				step: 'page_app_detail',
+				action: 'action_blueprint_clone_install',
+				ui_element: 'action_blueprint_clone_install',
+			},
+		},
+		uiclick_target: 'action_blueprint_clone_install'
+	}, _app_details));
+
+	window.dataLayer.push($.extend({
+		event: 'AppDirectoryApp_BlueprintCloneInstall',
+	}, _gtm_details));
+});
+
+$('[data-action_blueprint_clone_edit]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		contexts: {
+			ui_context: {
+				step: 'page_app_detail',
+				action: 'action_blueprint_clone_edit',
+				ui_element: 'action_blueprint_clone_edit',
+			},
+		},
+		uiclick_target: 'action_blueprint_clone_edit'
+	}, _app_details));
+
+	window.dataLayer.push($.extend({
+		event: 'AppDirectoryApp_BlueprintCloneEdit',
+	}, _gtm_details));
+});
+
+$('[data-action_blueprint_clones_delete]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		contexts: {
+			ui_context: {
+				step: 'page_app_detail',
+				action: 'action_blueprint_clones_delete',
+				ui_element: 'action_blueprint_clones_delete',
+			},
+		},
+		uiclick_target: 'action_blueprint_clones_delete'
+	}, _app_details));
+
+	window.dataLayer.push($.extend({
+		event: 'AppDirectoryApp_BlueprintClonesDelete',
+	}, _gtm_details));
+});
+
+$('[data-direct_install]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		click_target: 'action_app_install'
+	}, _app_details));
+
+	window.dataLayer.push($.extend({
+		event: 'AppDirectoryApp_DirectInstallVisitSite',
+	}, _gtm_details));
+});
+
+$('[data-visit_to_install], [data-js="visit_to_install"]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		click_target: 'action_app_install'
+	}, _app_details));
+
+	window.dataLayer.push($.extend({
+		event: 'AppDirectoryApp_VisitSiteToInstall',
+	}, _gtm_details));
+});
+
+$('[data-learn_more], [data-js="learn_more"]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		click_target: 'action_app_install'
+	}, _app_details));
+
+	window.dataLayer.push($.extend({
+		event: 'AppDirectoryApp_VisitSiteToLearnMore',
+	}, _gtm_details));
+});
+
+$('[data-open_in_slack], [data-js="open_in_slack"]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		click_target: 'action_open_in_slack'
+	}, _app_details));
+
+	window.dataLayer.push($.extend({
+		event: 'AppDirectoryApp_OpenInSlack',
+	}, _gtm_details));
+});
+
+$('#action_add_app_configuration, [data-js="add_config"]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		click_target: 'action_add_app_configuration'
+	}, _app_details));
+
+	window.dataLayer.push($.extend({
+		event: 'AppDirectoryApp_AddConfiguration',
+	}, _gtm_details));
+});
+
+// Clog listener for category button clicks
+$('[data-app-category]').click(function(e) {
+	if (e && e.target) {
+		const categoryId = e.target.getAttribute('data-app-category');
+		TS.interop.clog.track('APP_DIRECTORY_CATEGORY_BUTTON_CLICK', {
+			category_id: Number(categoryId),
+		});
+	}
+})
+
+// Clogs for app directory monetization exp
+$('[data-js="add_to_slack_money"]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		click_target: 'action_add_to_slack_money'
+	}, _app_details));
+});
+$('[data-js="learn_more_money"]').click(function() {
+	TS.interop.clog.track('APP_DIRECTORY_WEBSITE_CLICK', $.extend({
+		click_target: 'action_learn_more_money'
+	}, _app_details));
+});
+
+
+ boot_data.no_login = true; 
+boot_data.number_of_clone_apps = 0;
+boot_data.wta_installed = false;
+boot_data.app_user_id = "";
+boot_data.service_id = "";
+boot_data.is_mobile = false;
+</script>
+  <style>.color_9f69e7:not(.nuc) {color:#9F69E7;}.color_4bbe2e:not(.nuc) {color:#4BBE2E;}.color_e7392d:not(.nuc) {color:#E7392D;}.color_3c989f:not(.nuc) {color:#3C989F;}.color_674b1b:not(.nuc) {color:#674B1B;}.color_e96699:not(.nuc) {color:#E96699;}.color_e0a729:not(.nuc) {color:#E0A729;}.color_684b6c:not(.nuc) {color:#684B6C;}.color_5b89d5:not(.nuc) {color:#5B89D5;}.color_2b6836:not(.nuc) {color:#2B6836;}.color_99a949:not(.nuc) {color:#99A949;}.color_df3dc0:not(.nuc) {color:#DF3DC0;}.color_4cc091:not(.nuc) {color:#4CC091;}.color_9b3b45:not(.nuc) {color:#9B3B45;}.color_d58247:not(.nuc) {color:#D58247;}.color_bb86b7:not(.nuc) {color:#BB86B7;}.color_5a4592:not(.nuc) {color:#5A4592;}.color_db3150:not(.nuc) {color:#DB3150;}.color_235e5b:not(.nuc) {color:#235E5B;}.color_9e3997:not(.nuc) {color:#9E3997;}.color_53b759:not(.nuc) {color:#53B759;}.color_c386df:not(.nuc) {color:#C386DF;}.color_385a86:not(.nuc) {color:#385A86;}.color_a63024:not(.nuc) {color:#A63024;}.color_5870dd:not(.nuc) {color:#5870DD;}.color_ea2977:not(.nuc) {color:#EA2977;}.color_50a0cf:not(.nuc) {color:#50A0CF;}.color_d55aef:not(.nuc) {color:#D55AEF;}.color_d1707d:not(.nuc) {color:#D1707D;}.color_43761b:not(.nuc) {color:#43761B;}.color_e06b56:not(.nuc) {color:#E06B56;}.color_8f4a2b:not(.nuc) {color:#8F4A2B;}.color_902d59:not(.nuc) {color:#902D59;}.color_de5f24:not(.nuc) {color:#DE5F24;}.color_a2a5dc:not(.nuc) {color:#A2A5DC;}.color_827327:not(.nuc) {color:#827327;}.color_3c8c69:not(.nuc) {color:#3C8C69;}.color_8d4b84:not(.nuc) {color:#8D4B84;}.color_84b22f:not(.nuc) {color:#84B22F;}.color_4ec0d6:not(.nuc) {color:#4EC0D6;}.color_e23f99:not(.nuc) {color:#E23F99;}.color_e475df:not(.nuc) {color:#E475DF;}.color_619a4f:not(.nuc) {color:#619A4F;}.color_a72f79:not(.nuc) {color:#A72F79;}.color_7d414c:not(.nuc) {color:#7D414C;}.color_aba727:not(.nuc) {color:#ABA727;}.color_965d1b:not(.nuc) {color:#965D1B;}.color_4d5e26:not(.nuc) {color:#4D5E26;}.color_dd8527:not(.nuc) {color:#DD8527;}.color_bd9336:not(.nuc) {color:#BD9336;}.color_e85d72:not(.nuc) {color:#E85D72;}.color_dc7dbb:not(.nuc) {color:#DC7DBB;}.color_bc3663:not(.nuc) {color:#BC3663;}.color_9d8eee:not(.nuc) {color:#9D8EEE;}.color_8469bc:not(.nuc) {color:#8469BC;}.color_73769d:not(.nuc) {color:#73769D;}.color_b14cbc:not(.nuc) {color:#B14CBC;}</style><!-- slack-www-hhvm-main-iad-jtxi/ 2023-04-22 22:25:11/ v63d05973f396951801e556f9b424fd3b5d39a671/ B:H -->
+ </body>
+</html>
