@@ -7,7 +7,8 @@ gap: 50px;
 
 .Results_Container{
   max-width: 800px;
-  padding-left: 100px;
+  padding-left: 10%;
+  margin-right: 10%;
   display: flex;
   flex-direction: column;
   justify-content: start;

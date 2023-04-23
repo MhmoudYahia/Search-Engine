@@ -1,16 +1,18 @@
 .Home_Container{
   display: flex;
-  height: 100%;
   padding: 10px;
   flex-direction: column;
   align-items: center;
   justify-content: start;
-  padding-top: 190px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 .toggle-btn{
   position: absolute;
   left: 1px;
-  top: 1px;
+  top: 70px;
   z-index: 10
 }
 .Home_content{
@@ -21,6 +23,7 @@
 }
 .logo{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -102,5 +105,27 @@ position: relative;
   position: absolute;
   left: 35%;
   top: 35%;
+  translate: (-35%,-35%);
   z-index: 100;
 }
+@media screen and (max-width: 650px) {
+  .Voice{
+  left: 10%;
+  top: 35%;
+  translate: (-50%,-50%);
+  }
+}
+@media screen and (max-width: 400px) {
+  .Voice{
+  left: 10%;
+  top: 35%;
+  translate: (-50%,-50%);
+  }
+  .css-2c1xq-MuiPaper-root-MuiAlert-root{
+    min-width: 300px;
+  }
+  .search_btn{
+    display: none;
+  }
+}
+

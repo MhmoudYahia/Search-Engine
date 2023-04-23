@@ -14,8 +14,9 @@ const Navbar = (props) => {
     <AppBar sx={{zIndex:'0'}}  position="fixed">
       <Container sx={{width:'100%',padding:'5px'}} maxWidth="xl">
         <Toolbar sx={{display:'flex',alignItems:'center',justifyContent:'center',gap:'12px',width:'100%'}} >
-          <div style={{ paddingLeft: '69px', cursor: 'pointer' }} onClick={() => navigate('/')}  className="logo">
+          <div style={{ display:'flex',flexDirection:'row',cursor: 'pointer' }} onClick={() => navigate('/')}  className="logo">
             <img src={logo} style={{width:'45px'}} alt="" />
+            <h4 style={{ display: 'flex', fontFamily: 'Comfortaa', fontSize: '27px', fontWeight: '700', color: '#7d8b95' }}>Quester</h4>
           </div>
           <Searchbar target={props.target} />
         </Toolbar>

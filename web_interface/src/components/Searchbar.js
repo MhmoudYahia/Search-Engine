@@ -6,12 +6,15 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { useNavigate } from "react-router-dom"
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import VoiceAlert from "./VoiceAlert";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 const Searchbar = (props) => {
+  const screen500 = useMediaQuery('(max-width:650px)');
+  console.log(screen500);
   const {
   transcript,
   listening,
@@ -52,7 +55,7 @@ const Searchbar = (props) => {
           if (e.target.value !== '') setEmptyBarError(false);
         }}
         sx={{
-          minWidth: '500px',
+          width: screen500 ? "300px" : "500px",
           "& .MuiOutlinedInput-root:hover": {
             "& > fieldset": {
               borderColor: "#1976d2"
@@ -74,7 +77,7 @@ const Searchbar = (props) => {
         placeholder='Search' variant="outlined" />
     </div>
     <div className="search_btn">
-      <Button onClick={handleSearchClick} variant="contained">Search</Button>
+      <Button sx={{maxWidth:screen500?"100px":"auto"}} onClick={handleSearchClick} variant="contained">Search</Button>
     </div>
     {isVoiceClicked ? <VoiceAlert setSearchText={setSearchText} transcript={transcript} SpeechRecognition={SpeechRecognition} close={setIsVoiceClicked} />:<></>}
   </> );
