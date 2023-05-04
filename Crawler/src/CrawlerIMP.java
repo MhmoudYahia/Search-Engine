@@ -83,7 +83,6 @@ public class CrawlerIMP implements Runnable {
         try {
             BufferedWriter buff=new BufferedWriter(new FileWriter("./Files/"+idx.getAndSet(idx.intValue()+1)+".html"));
             System.out.println(doc.baseUri());
-            buff.write(doc.baseUri()+'\n');
             buff.write(doc.html());
             buff.close();
         } catch (IOException e) {
