@@ -81,10 +81,18 @@ public class CrawlerIMP implements Runnable {
 
     private void DownloadPage(Document doc) {
         try {
-            BufferedWriter buff=new BufferedWriter(new FileWriter("./Files/"+idx.getAndSet(idx.intValue()+1)+".html"));
+            int id=idx.getAndSet(idx.intValue()+1);
+            File dir=new File("./Files/"+id);
+            if(!dir.mkdir()){
+                System.out.println("Error in creating directory");
+            }
+            BufferedWriter buff=new BufferedWriter(new FileWriter("./Files/"+id+"/"+id+".html"));
+            BufferedWriter linkbuff=new BufferedWriter(new FileWriter("./Files/"+id+"/"+"link.txt"));
             System.out.println(doc.baseUri());
             buff.write(doc.html());
             buff.close();
+            linkbuff.write(doc.baseUri());
+            linkbuff.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
