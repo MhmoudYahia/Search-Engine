@@ -1,7 +1,7 @@
 public class CrawlerTester {
     public static void main(String[] args) {
 
-        CrawlerIMP CR=new CrawlerIMP("./Seed/Seed.txt");
+        CrawlerIMP CR=new CrawlerIMP("Crawler/Seed/Seed.txt");
         Thread[] threads=new Thread[5];
         for(int i=0; i<5;i++)
         {

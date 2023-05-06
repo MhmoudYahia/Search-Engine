@@ -90,6 +90,7 @@ public class IndexedWebPage {
     }
 
     public static DBObject toDocument(IndexedWebPage iWP) {
+        System.out.println("URL_"+iWP.getUrl());
         return new BasicDBObject("Page_URL", iWP.getUrl())
                 .append("TF", iWP.getTF())
                 .append("Normalized_TF", iWP.get_normalizedTf())

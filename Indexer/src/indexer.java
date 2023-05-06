@@ -81,6 +81,7 @@ public class indexer implements Runnable {
         webpagesCollection = database.getCollection(Constants.WEB_PAGES_COLLECTION);
         //collection.createIndex(Indexes.ascending(Constants.F_URL),indexOPtions);
         System.out.println("Connecting to DB successfully.");
+
     }
 
     public indexer() {
@@ -95,28 +96,28 @@ public class indexer implements Runnable {
         int th_id = Integer.valueOf(Thread.currentThread().getName());
         int current_Index = th_id;
 
-        // current index file read & write
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter("currentindex/" + th_id + ".txt", true));
-            writer.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
+//        // current index file read & write
+//        BufferedWriter writer = null;
+//        try {
+//            writer = new BufferedWriter(new FileWriter("currentindex/" + th_id + ".txt", true));
+//            writer.close();
+//        } catch (IOException e1) {
+//            e1.printStackTrace();
+//        }
 
         // get current_index
-        try {
-            File currentIndex = new File("currentindex/" + th_id + ".txt");
-            try (Scanner myScanner = new Scanner(currentIndex)) {
-                if (myScanner.hasNext()) {
-                    current_Index = myScanner.nextInt();
-                }
-            }
-            currentIndex.delete();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+//        try {
+//            File currentIndex = new File("currentindex/" + th_id + ".txt");
+//            try (Scanner myScanner = new Scanner(currentIndex)) {
+//                if (myScanner.hasNext()) {
+//                    current_Index = myScanner.nextInt();
+//                }
+//            }
+//            currentIndex.delete();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
 
         // load stop words
         String stopWords = loadStopWords();
@@ -131,7 +132,7 @@ public class indexer implements Runnable {
             fileTotCnt =fileCnt;
             while(fileCnt != 0 ) {
                 if(current_Index < fileTotCnt) {
-                    File htmlFile = new File("Crawler/Files/" + current_Index + ".html");
+                    File htmlFile = new File("Crawler/Files/"+current_Index+"/"+current_Index+".html");
                     String ParsedStr = Jsoup.parse(htmlFile, null).text();
 
                     String StemmedStr = processStringWithStemming(ParsedStr, stopWords);
@@ -139,10 +140,20 @@ public class indexer implements Runnable {
                     String[] nonStmdWords = nonStemmedStr.split(" ");
 
                     int words_i = 0;
-                    String linkURL = "hhh";
+                    String linkURL = "";
+// to do
+                    try {
+                    File linkFile = new File("Crawler/Files/"+current_Index+"/"+"link.txt");
 
-                    //TODO get linkURL
-
+                    try (Scanner myScanner = new Scanner(linkFile)) {
+                        while (myScanner.hasNext()) linkURL += myScanner.nextLine();
+                    }
+                                linkFile.delete();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                    }
+                    System.out.println("URL#"+current_Index +" : "+linkURL);
                     String title = "";
                     String desc = "";
                     Document doc = null;
@@ -228,15 +239,16 @@ public class indexer implements Runnable {
                 }
                 fileCnt--;
             }
-             writer = new BufferedWriter(new FileWriter("currentindex/" + th_id + ".txt", true));
-                writer.write(String.valueOf(current_Index));
+//             writer = new BufferedWriter(new FileWriter("currentindex/" + th_id + ".txt", true));
+//                writer.write(String.valueOf(current_Index));
 
 
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        System.out.println("finish indexing");
+        System.out.println("Thread#"+th_id+ " finished indexing");
+        System.out.println("finished Docs untill now: "+ documentCount);
     }
 
     //return a clean, preprocessed and stemmed string
