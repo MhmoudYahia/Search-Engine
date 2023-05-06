@@ -1,8 +1,7 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -19,12 +18,14 @@ import org.jsoup.select.Elements;
 public class CrawlerIMP implements Runnable {
     private HashSet<String> Vis;
     private Queue<String>Seed;
+    private RobotParser RP;
     AtomicInteger idx;
 
     public CrawlerIMP(String path) {
         Vis=new HashSet<>();
         Seed=new LinkedList<>();
         idx=new AtomicInteger(0);
+        RP=new RobotParser();
         readSeed(path);
     }
 
@@ -38,11 +39,14 @@ public class CrawlerIMP implements Runnable {
                     try {
                         this.wait();
                     } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
                 curLink=Seed.poll();
+            }
+            if(!RobotParser.isSafe(curLink)) {
+                System.out.println("NOT Safe!!! "+curLink);
+                continue;
             }
 
             try {
@@ -53,7 +57,6 @@ public class CrawlerIMP implements Runnable {
                     childLinks=getLinks(doc);
                 }
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
@@ -78,16 +81,24 @@ public class CrawlerIMP implements Runnable {
         }
         return links;
     }
-
+    void deleteDir(File file) {
+        File[] contents = file.listFiles();
+        if (contents != null) {
+            for (File f : contents) {
+                deleteDir(f);
+            }
+        }
+        file.delete();
+    }
     private void DownloadPage(Document doc) {
         try {
             int id=idx.getAndSet(idx.intValue()+1);
-            File dir=new File("Crawler/Files/"+id);
-            if(!dir.mkdir()){
-                System.out.println("Error in creating directory");
+            File dir=new File("./Files/"+id);
+            while(!dir.mkdir()){
+                deleteDir(dir);
             }
-            BufferedWriter buff=new BufferedWriter(new FileWriter("Crawler/Files/"+id+"/"+id+".html"));
-            BufferedWriter linkbuff=new BufferedWriter(new FileWriter("Crawler/Files/"+id+"/"+"link.txt"));
+            BufferedWriter buff=new BufferedWriter(new FileWriter("./Files/"+id+"/"+id+".html"));
+            BufferedWriter linkbuff=new BufferedWriter(new FileWriter("./Files/"+id+"/"+"link.txt"));
             System.out.println(doc.baseUri());
             buff.write(doc.html());
             buff.close();
@@ -118,7 +129,6 @@ public class CrawlerIMP implements Runnable {
             e.printStackTrace();
         }
     }
-
     @Override
     public void run() {
         // TODO Auto-generated method stub
