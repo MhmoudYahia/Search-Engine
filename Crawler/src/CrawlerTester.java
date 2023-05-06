@@ -2,7 +2,7 @@ public class CrawlerTester {
     final static int num_threads=6;
     public static void main(String[] args) {
 
-        CrawlerIMP CR=new CrawlerIMP("./Seed/Seed.txt");
+        CrawlerIMP CR=new CrawlerIMP("Crawler/Seed/Seed.txt");
         Thread[] threads=new Thread[num_threads];
         for(int i=0; i<num_threads;i++)
         {

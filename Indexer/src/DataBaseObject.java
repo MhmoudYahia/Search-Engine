@@ -22,7 +22,7 @@ public final class DataBaseObject {
 
     public DataBaseObject(String w, IndexedWebPage wp) {
         this.setWord(w);
-        this.addToPageData(wp);
+        this.addPage(wp);
     }
 
     public DataBaseObject(String w) {
@@ -33,7 +33,7 @@ public final class DataBaseObject {
         this.word = w;
     }
 
-    public void addToPageData(IndexedWebPage indexerdWP) {
+    public void addPage(IndexedWebPage indexerdWP) {
         this.pageData.add(IndexedWebPage.toDocument(indexerdWP));
         cnt++;
     }

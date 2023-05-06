@@ -8,13 +8,15 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import java.util.ArrayList;
 
+
 /**
  *
  * @author mahmoud
  */
 public class IndexedWebPage {
-
     String url;
+
+    public int score;
     int TF;
     double normalized_TF;
     double pageRank;   //later for ranker
@@ -23,7 +25,7 @@ public class IndexedWebPage {
 
     // positions of this word in this page   (word => pages)
     ArrayList<Integer> WordPositions;
-    boolean headings[] = {false, false, false};
+
 
     public IndexedWebPage() {
 
@@ -36,14 +38,11 @@ public class IndexedWebPage {
         this.WordPositions.add(first_pos);
     }
 
-    public boolean[] getHeadings() {
-        return headings;
+    public void setScore(int s ){
+        score = s;
     }
-
-    public void setHeadings(int h) {
-        if (h >= 0 && h < 3) {
-            this.headings[h] = true;
-        }
+    public int getScore(){
+       return score;
     }
 
     public void incrementTF() {
@@ -90,9 +89,9 @@ public class IndexedWebPage {
     }
 
     public static DBObject toDocument(IndexedWebPage iWP) {
-        System.out.println("URL_"+iWP.getUrl());
         return new BasicDBObject("Page_URL", iWP.getUrl())
                 .append("TF", iWP.getTF())
+                .append("Score", iWP.getScore())
                 .append("Normalized_TF", iWP.get_normalizedTf())
                 .append("Word_Positions_In_this_Page", iWP.getWordPositions())
                 .append("Page_Title", iWP.getTitle())

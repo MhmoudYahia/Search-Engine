@@ -29,7 +29,6 @@ public class Main {
         //set Data base
         indexer.setDB();
         indexer.webpagesCollection.insert(DBlist);
-        indexer.webpagesCollection.insert(new BasicDBObject("docCnt", indexer.documentCount));
         System.out.println("Finished Adding to the data base.");
 
     }

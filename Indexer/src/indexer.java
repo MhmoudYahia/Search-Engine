@@ -90,8 +90,7 @@ public class indexer implements Runnable {
 
     public void indexHandeler() {
         System.out.println("start indexing");
-        HashMap< String, IndexedWebPage> wordsHashMap = new HashMap<>();
-        HashMap<String, String> stemmedToNonStemmedMap = new HashMap<>();
+
 
         int th_id = Integer.valueOf(Thread.currentThread().getName());
         int current_Index = th_id;
@@ -132,12 +131,14 @@ public class indexer implements Runnable {
             fileTotCnt =fileCnt;
             while(fileCnt != 0 ) {
                 if(current_Index < fileTotCnt) {
+                    HashMap< String, IndexedWebPage> wordsHashMap = new HashMap<>();
+//                    HashMap<String, String> stemmedToNonStemmedMap = new HashMap<>();
                     File htmlFile = new File("Crawler/Files/"+current_Index+"/"+current_Index+".html");
                     String ParsedStr = Jsoup.parse(htmlFile, null).text();
 
                     String StemmedStr = processStringWithStemming(ParsedStr, stopWords);
-                    String nonStemmedStr = processStringWithoutStemming(ParsedStr, stopWords);
-                    String[] nonStmdWords = nonStemmedStr.split(" ");
+ //                   String nonStemmedStr = processStringWithoutStemming(ParsedStr, stopWords);
+ //                   String[] nonStmdWords = nonStemmedStr.split(" ");
 
                     int words_i = 0;
                     String linkURL = "";
@@ -153,16 +154,17 @@ public class indexer implements Runnable {
                         System.out.println("An error occurred.");
                         e.printStackTrace();
                     }
-                    System.out.println("URL#"+current_Index +" : "+linkURL);
+//                    System.out.println("URL#"+current_Index +" : "+linkURL);
                     String title = "";
                     String desc = "";
+                    int score = 0;
                     Document doc = null;
-
+                    // word => page
                     for (String str : StemmedStr.split(" ")) {
                         if (wordsHashMap.containsKey(str)) {
                             wordsHashMap.get(str).addPosition(words_i);
                         } else {
-                            stemmedToNonStemmedMap.put(str, nonStmdWords[words_i]);
+//                            stemmedToNonStemmedMap.put(str, nonStmdWords[words_i]);
                             wordsHashMap.put(str, new IndexedWebPage(linkURL, words_i));
                         }
                         words_i++;
@@ -171,64 +173,100 @@ public class indexer implements Runnable {
                     //parse title & headings
                     doc = Jsoup.parse(htmlFile, "UTF-8");
                     title = doc.title();
-                    String[] heads = new String[3];
-                    for (int i = 0; i < 3; i++) {
-                        Elements h = doc.getElementsByTag("h" + String.valueOf(i + 1));
-                        heads[i] = Jsoup.parse(h.toString()).text();
+//                    String[] heads = new String[3];
+//                    for (int i = 0; i < 3; i++) {
+//                        Elements h = doc.getElementsByTag("h" + String.valueOf(i + 1));
+//                        heads[i] = Jsoup.parse(h.toString()).text();
+//                    }
+                    // Find the <meta> tag with the name attribute set to "description"
+                    if(doc.select("meta[name=description]").size() > 0) {
+                        Element meta = doc.select("meta[name=description]").first();
+
+                        // Extract the value of the "content" attribute from the <meta> tag
+                        if (meta.hasAttr("content")) {
+                            desc = meta.attr("content");
+                        }
+                    }
+//                    else{
+//                        Elements elements= doc.getElementsContainingOwnText(stemmedToNonStemmedMap.get(entry.getKey()));
+//                        if(elements.size() > 0) {
+//                            Element descr = doc.getElementsContainingOwnText(stemmedToNonStemmedMap.get(entry.getKey())).get(0).clearAttributes();
+//                            desc = Jsoup.parse(descr.toString()).text();
+//                        }
+//                    }
+                    //headings
+                    Elements elements = doc.select("h1, h2, h3, h4 , h5, h6, body");
+                    String h1Text = "";
+                    String h2Text = "";
+                    String h3Text = "";
+                    String h4Text = "";
+                    String h5Text = "";
+                    String h6Text = "";
+                    String bodyText = "";
+
+
+                    for (Element element : elements) {
+                        String tagName = element.tagName();
+                        String text = element.text();
+                        if (tagName.equals("h1")) {
+                            h1Text=text;
+                        } else if (tagName.equals("h2")) {
+                            h2Text=text;
+                        } else if (tagName.equals("h3")) {
+                            h3Text=text;
+                        }
+                        else if (tagName.equals("h4")) {
+                            h4Text=text;
+                        }
+                        else if (tagName.equals("h5")) {
+                            h5Text=text;
+                        }
+                        else if (tagName.equals("h6")) {
+                            h6Text=text;
+                        }
+                        else if (tagName.equals("body")) {
+                            bodyText=text;
+                        }
                     }
 
-                    //parse desc
+                    //loop on all words of this link
                     for (Map.Entry<String, IndexedWebPage> entry : wordsHashMap.entrySet()) {
                         if (entry.getKey() == null || "".equals(entry.getKey())) {
                             break;
                         }
-                        // Find the <meta> tag with the name attribute set to "description"
-                        if(doc.select("meta[name=description]").size() > 0) {
-                            Element meta = doc.select("meta[name=description]").first();
-
-                            // Extract the value of the "content" attribute from the <meta> tag
-                            if (meta.hasAttr("content")) {
-                                desc = meta.attr("content");
-                            }
-                        }else{
-                            Elements elements= doc.getElementsContainingOwnText(stemmedToNonStemmedMap.get(entry.getKey()));
-                        if(elements.size() > 0) {
-                            Element descr = doc.getElementsContainingOwnText(stemmedToNonStemmedMap.get(entry.getKey())).get(0).clearAttributes();
-                            desc = Jsoup.parse(descr.toString()).text();
+                        if( isNumeric(entry.getKey()) || entry.getKey().length() == 1){
+                            continue;
                         }
+                        // decide score
+                        if(h1Text.contains(entry.getKey())){
+                            score = Constants.h1Score;
+                        } else if(h2Text.contains( entry.getKey())){
+                            score = Constants.h2Score;
+                        }else if(h3Text.contains( entry.getKey())){
+                            score = Constants.h3Score;
+                        }else if(h4Text.contains( entry.getKey())){
+                            score = Constants.h4Score;
+                        }else if(h5Text.contains( entry.getKey())){
+                            score = Constants.h5Score;
+                        }else if(h6Text.contains( entry.getKey())){
+                            score = Constants.h6Score;
+                        }else if(bodyText.contains( entry.getKey())){
+                            score = Constants.bodyScore;
                         }
-                        //set headings
-                        // check on this entry word, in which headings?
-                        for (int i = 0; i < 3; i++) {
-                            heads[i] = processStringWithStemming(heads[i], stopWords);
-                            for (String word : heads[i].split(" ")) {
-                                if (word.equals(entry.getKey())) {
-                                    entry.getValue().setHeadings(i);
-                                    break;
-                                }
-                            }
-                        }
-
-//                // for test
-//                System.out.println("title " +title);
-//                System.out.println("desc " +desc);
-//                System.out.println("entry.getValue() " +entry.getValue().WordPositions);
-
-
                         //set to indexed word
                         entry.getValue().setTitle(title);
                         entry.getValue().setDesc(desc);
                         entry.getValue().normalize(StemmedStr.length());
-
+                        entry.getValue().setScore(score);
                         //add to DB
                         synchronized (indexer.class) {
                             if (words_DBMap.containsKey(entry.getKey())) {
-                                words_DBMap.get(entry.getKey()).addToPageData(entry.getValue());
+//                                System.out.println(entry.getKey());
+                                words_DBMap.get(entry.getKey()).addPage(entry.getValue());
 
                             } else {
                                 words_DBMap.put(entry.getKey(), new DataBaseObject(entry.getKey(), entry.getValue()));
                             }
-//                    System.out.println("entry.getValue() "+entry.getValue().TF);
                         }
                     }
                     synchronized (indexer.class) {
@@ -298,5 +336,13 @@ public class indexer implements Runnable {
             System.out.println("An error occurred.");
         }
         return stopWords;
+    }
+    public static boolean isNumeric(String str) {
+        try {
+            double d = Double.parseDouble(str);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }
