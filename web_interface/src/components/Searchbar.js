@@ -14,7 +14,6 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 
 const Searchbar = (props) => {
   const screen500 = useMediaQuery('(max-width:650px)');
-  console.log(screen500);
   const {
   transcript,
   listening,
