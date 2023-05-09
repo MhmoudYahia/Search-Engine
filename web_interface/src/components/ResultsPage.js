@@ -10,7 +10,7 @@ import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import Skeleton from '@mui/material/Skeleton';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import useFetch from "../useFetch";
 
 
 const ResultsPage = (props) => {
@@ -19,15 +19,16 @@ const ResultsPage = (props) => {
 
   const theme=useContext(ThemeContext);
   const location = useLocation();
-  const [loading,setLoading]=React.useState(true);
   const navigate=useNavigate();
   const query = new URLSearchParams(location.search);
   const page = parseInt(query.get('page') || '1', 10);
+  const [loading,setLoading]=React.useState(false);
   const {target}=useParams();
-  setTimeout(() => {
-    setLoading(false);
-  }, 3000);
-  const results = [];
+  const results=[];
+  const { data, isPending, error } = useFetch('http://localhost:8080/?q="Yousef"');
+  ///to be removed
+  console.log(data);
+  ////////////////
   for (let i = 0; i < 27; i++) {
     results[i] = {
       url: "https://geeksforgeeks.org/",
