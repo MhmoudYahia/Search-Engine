@@ -1,5 +1,5 @@
 
-import com.mongodb.MongoClient;
+import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.io.BufferedWriter;
@@ -17,13 +17,14 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
+import com.mongodb.client.model.IndexOptions;
+import com.mongodb.client.model.Indexes;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.tartarus.snowball.ext.porterStemmer;
-import com.mongodb.DBCollection;
-import com.mongodb.DB;
+
 /*
  * @author mahmoud
  */
@@ -35,6 +36,7 @@ public class indexer implements Runnable {
     /*
      * class variables
      */
+    public static int tempcnt=0;
     public static DB database;
     public static DBCollection webpagesCollection;
     public static MongoClient mongoClient;
@@ -42,8 +44,8 @@ public class indexer implements Runnable {
     public static int documentCount = 0;
     public static boolean addToDataBasePhase = false;
     public static boolean updateOldDataBasePhase = false;
+    public static int fileCnt = 0;
 
-    public static HashMap< String, DataBaseObject> words_DBMap = new HashMap< String, DataBaseObject>();
 
     //    public static void main(String[] args) throws Exception {
 //
@@ -72,20 +74,34 @@ public class indexer implements Runnable {
 //        System.out.println("Finished Adding to the data base.");
 //    }
     public static void setDB() {
-        System.out.println("starting data base.");
-        mongoClient = new MongoClient(Constants.DATABASE_HOST_ADDRESS, Constants.DATABASE_PORT_NUMBER);
-        mongoClient.dropDatabase(Constants.DATABASE_NAME);
-        database = mongoClient.getDB(Constants.DATABASE_NAME);
 
-        //IndexOptions indexOPtions =new IndexOptions();
+        mongoClient = new MongoClient(Constants.DATABASE_HOST_ADDRESS, Constants.DATABASE_PORT_NUMBER);
+        database = mongoClient.getDB(Constants.DATABASE_NAME);
+        if(Main.lastFileOpened == 0) {
+            System.out.println("starting new data base.");
+            mongoClient.dropDatabase(Constants.DATABASE_NAME);
+        }
+        else{
+            System.out.println("append to data base");
+        }
+
         webpagesCollection = database.getCollection(Constants.WEB_PAGES_COLLECTION);
-        //collection.createIndex(Indexes.ascending(Constants.F_URL),indexOPtions);
+
+        // create a word index to make the search in O(1)
+        DBObject index = new BasicDBObject("Word", 1);
+        DBObject options = new BasicDBObject("unique", false).append("name", "word_index");
+        webpagesCollection.createIndex(index, options);
+
         System.out.println("Connecting to DB successfully.");
 
     }
 
     public indexer() {
-
+        try (Stream<Path> files = Files.list(Paths.get("Crawler/Files"))) {
+            fileCnt = (int)files.count() - 1;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void indexHandeler() {
@@ -122,15 +138,12 @@ public class indexer implements Runnable {
         String stopWords = loadStopWords();
 
         try {
-            int fileCnt = 0;
-            int fileTotCnt = 0;
 
-            try (Stream<Path> files = Files.list(Paths.get("Crawler/Files"))) {
-                fileCnt = (int)files.count() - 1;
-            }
-            fileTotCnt =fileCnt;
-            while(fileCnt != 0 ) {
-                if(current_Index < fileTotCnt) {
+
+           int curr_file = Main.lastFileOpened;
+           current_Index+=Main.lastFileOpened;
+            while(curr_file <= fileCnt ) {
+                if(current_Index < fileCnt) {
                     HashMap< String, IndexedWebPage> wordsHashMap = new HashMap<>();
 //                    HashMap<String, String> stemmedToNonStemmedMap = new HashMap<>();
                     File htmlFile = new File("Crawler/Files/"+current_Index+"/"+current_Index+".html");
@@ -260,12 +273,26 @@ public class indexer implements Runnable {
                         entry.getValue().setScore(score);
                         //add to DB
                         synchronized (indexer.class) {
-                            if (words_DBMap.containsKey(entry.getKey())) {
+
+                            if (Main.words_DBMap.containsKey(entry.getKey())) {
 //                                System.out.println(entry.getKey());
-                                words_DBMap.get(entry.getKey()).addPage(entry.getValue());
+                                Main.words_DBMap.get(entry.getKey()).addPage(entry.getValue());
 
                             } else {
-                                words_DBMap.put(entry.getKey(), new DataBaseObject(entry.getKey(), entry.getValue()));
+//                                if(Main.lastFileOpened != 0) {
+//                                    BasicDBObject update = new BasicDBObject("$addToSet", new BasicDBObject("Pages_Containing_This_Word", IndexedWebPage.toDocument(entry.getValue())))
+//                                            .append("$inc", new BasicDBObject("Total_Apperance_in_All_Pages", 1));;
+//                                    DBObject document = webpagesCollection.findAndModify(new BasicDBObject("Word", entry.getKey()), update);
+//                                    if (document == null) {
+//                                        Main.words_DBMap.put(entry.getKey(), new DataBaseObject(entry.getKey(), entry.getValue()));
+//                                    }else{
+////                                        System.out.println("word: "+entry.getKey()+" is added diriictly to DB");
+//                                        tempcnt++;
+//                                    }
+//                                }else{
+                                    Main.words_DBMap.put(entry.getKey(), new DataBaseObject(entry.getKey(), entry.getValue()));
+
+//                                }
                             }
                         }
                     }
@@ -274,9 +301,11 @@ public class indexer implements Runnable {
                     }
                     System.out.println("Thread : " + th_id + " finished link num :" + current_Index);
                     current_Index += Constants.NUM_THREADS;
+
                 }
-                fileCnt--;
+                curr_file++;
             }
+
 //             writer = new BufferedWriter(new FileWriter("currentindex/" + th_id + ".txt", true));
 //                writer.write(String.valueOf(current_Index));
 
@@ -294,13 +323,17 @@ public class indexer implements Runnable {
 
         String processd_txt = "";
         txt = processStringWithoutStemming(txt, stopWords);
+//        System.out.println("non stemmed: "+txt);
         porterStemmer stemmer = new porterStemmer();
 
         for (String iterator : txt.split(" ")) {
             stemmer.setCurrent(iterator);
             stemmer.stem();
-            processd_txt += stemmer.getCurrent() + " ";
+            String stemed= stemmer.getCurrent();
+            processd_txt += stemed + " ";
+//            System.out.println("stemmed=> "+stemed+"   non stemmed=> "+iterator);
         }
+//        System.out.println("stemmed: "+ processd_txt);
         return processd_txt;
     }
 
