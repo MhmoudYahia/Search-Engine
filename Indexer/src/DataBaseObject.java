@@ -7,6 +7,8 @@
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -51,7 +53,7 @@ public final class DataBaseObject {
 
         DBObject doc = new BasicDBObject("Word", this.word)
                 .append("Total_Apperance_in_All_Pages", this.cnt)
-                .append("IDF", this.idf)
+//                .append("IDF", this.idf)
                 .append("Pages_Containing_This_Word", this.pageData);
         return doc;
     }

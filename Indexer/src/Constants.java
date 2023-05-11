@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class Constants {
     //=================================== Indexer ==================================
     public static final int NUM_THREADS = 10;

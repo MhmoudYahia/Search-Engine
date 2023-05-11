@@ -90,9 +90,9 @@ public class IndexedWebPage {
 
     public static DBObject toDocument(IndexedWebPage iWP) {
         return new BasicDBObject("Page_URL", iWP.getUrl())
-                .append("TF", iWP.getTF())
+//                .append("TF", iWP.getTF())
                 .append("Score", iWP.getScore())
-                .append("Normalized_TF", iWP.get_normalizedTf())
+//                .append("Normalized_TF", iWP.get_normalizedTf())
                 .append("Word_Positions_In_this_Page", iWP.getWordPositions())
                 .append("Page_Title", iWP.getTitle())
                 .append("Page_Description", iWP.getDisc());
