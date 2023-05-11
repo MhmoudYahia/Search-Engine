@@ -12,7 +12,10 @@ public class Constants {
     public static final int h5Score = 5;
 
     public static final int h6Score = 6;
-    public static final int bodyScore = 7;
+
+    public static final int PScore = 7;
+    public static final int bodyScore = 8;
+
 
 
 

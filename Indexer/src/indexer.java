@@ -77,7 +77,7 @@ public class indexer implements Runnable {
 
         mongoClient = new MongoClient(Constants.DATABASE_HOST_ADDRESS, Constants.DATABASE_PORT_NUMBER);
         database = mongoClient.getDB(Constants.DATABASE_NAME);
-        if(Main.lastFileOpened == 0) {
+        if(Main.lastFileOpened == 1) {
             System.out.println("starting new data base.");
             mongoClient.dropDatabase(Constants.DATABASE_NAME);
         }
@@ -208,7 +208,7 @@ public class indexer implements Runnable {
 //                        }
 //                    }
                     //headings
-                    Elements elements = doc.select("h1, h2, h3, h4 , h5, h6, body");
+                    Elements elements = doc.select("h1, h2, h3, h4 , h5, h6, body,p");
                     String h1Text = "";
                     String h2Text = "";
                     String h3Text = "";
@@ -216,11 +216,12 @@ public class indexer implements Runnable {
                     String h5Text = "";
                     String h6Text = "";
                     String bodyText = "";
+                    String PText = "";
 
 
                     for (Element element : elements) {
                         String tagName = element.tagName();
-                        String text = element.text();
+                        String text = element.ownText();
                         if (tagName.equals("h1")) {
                             h1Text=text;
                         } else if (tagName.equals("h2")) {
@@ -237,7 +238,7 @@ public class indexer implements Runnable {
                         else if (tagName.equals("h6")) {
                             h6Text=text;
                         }
-                        else if (tagName.equals("body")) {
+                      else if (tagName.equals("body")) {
                             bodyText=text;
                         }
                     }
@@ -250,7 +251,12 @@ public class indexer implements Runnable {
                         if( isNumeric(entry.getKey()) || entry.getKey().length() == 1){
                             continue;
                         }
-                        // decide score
+                        //get p
+
+
+
+//                         decide score
+
                         if(h1Text.contains(entry.getKey())){
                             score = Constants.h1Score;
                         } else if(h2Text.contains( entry.getKey())){
@@ -265,6 +271,18 @@ public class indexer implements Runnable {
                             score = Constants.h6Score;
                         }else if(bodyText.contains( entry.getKey())){
                             score = Constants.bodyScore;
+                        }
+
+                        //set p
+                        Elements p_elements = doc.select("p");
+                        //System.out.println(p_elements);
+                        for (Element element : elements) {
+                            String text = element.ownText();
+                            if(text.contains(entry.getKey())){
+                                entry.getValue().setParagraph(text);
+                                score = Constants.PScore;
+                                break;
+                            }
                         }
                         //set to indexed word
                         entry.getValue().setTitle(title);
