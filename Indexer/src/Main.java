@@ -56,6 +56,13 @@ public class Main {
         }
 
         //insert in DB
+
+        if(lastFileOpened ==1){
+            indexer.webpagesCollection.insert(new BasicDBObject("info","Doc_meta_data" ).append("Doc_Cnt",indexer.documentCount));
+        }else{
+            BasicDBObject update = new BasicDBObject("$inc", new BasicDBObject("Doc_Cnt", indexer.documentCount));
+            indexer.webpagesCollection.update(new BasicDBObject("info","Doc_meta_data" ), update);
+        }
        indexer.webpagesCollection.insert(DBlist);
         System.out.println("list addedd" +DBlist.size());
         System.out.println("addedd dirictly "+indexer.tempcnt);

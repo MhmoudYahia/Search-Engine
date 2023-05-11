@@ -162,11 +162,12 @@ public class indexer implements Runnable {
                     try (Scanner myScanner = new Scanner(linkFile)) {
                         while (myScanner.hasNext()) linkURL += myScanner.nextLine();
                     }
-                                linkFile.delete();
+                               // linkFile.delete();
                     } catch (FileNotFoundException e) {
                         System.out.println("An error occurred.");
                         e.printStackTrace();
                     }
+
 //                    System.out.println("URL#"+current_Index +" : "+linkURL);
                     String title = "";
                     String desc = "";
@@ -309,14 +310,12 @@ public class indexer implements Runnable {
 //                                    }
 //                                }else{
                                     Main.words_DBMap.put(entry.getKey(), new DataBaseObject(entry.getKey(), entry.getValue()));
-
+                                    documentCount++;
 //                                }
                             }
                         }
                     }
-                    synchronized (indexer.class) {
-                        documentCount++;
-                    }
+
                     System.out.println("Thread : " + th_id + " finished link num :" + current_Index);
                     current_Index += Constants.NUM_THREADS;
 
