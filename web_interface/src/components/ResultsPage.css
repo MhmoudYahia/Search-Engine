@@ -4,7 +4,13 @@ display: flex;
 flex-direction: column;
 gap: 50px;
 }
+#light {
 
+}
+
+#dark {
+  
+}
 .Results_Container{
   max-width: 800px;
   padding-left: 10%;

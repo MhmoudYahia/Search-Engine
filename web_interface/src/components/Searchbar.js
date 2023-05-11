@@ -13,13 +13,13 @@ import VoiceAlert from "./VoiceAlert";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 const Searchbar = (props) => {
-  const screen500 = useMediaQuery('(max-width:650px)');
+  
   const {
   transcript,
   listening,
   resetTranscript,
-  browserSupportsSpeechRecognition
-} = useSpeechRecognition(); 
+  browserSupportsSpeechRecognition} = useSpeechRecognition(); 
+
   const [isVoiceClicked,setIsVoiceClicked] =useState(false);
   const [searchText, setSearchText] = useState(props.target?props.target:'');
   const [EmptyBarError, setEmptyBarError] = useState(false);
@@ -54,7 +54,7 @@ const Searchbar = (props) => {
           if (e.target.value !== '') setEmptyBarError(false);
         }}
         sx={{
-          width: screen500 ? "300px" : "500px",
+          width:"500px",
           "& .MuiOutlinedInput-root:hover": {
             "& > fieldset": {
               borderColor: "#1976d2"
@@ -76,7 +76,7 @@ const Searchbar = (props) => {
         placeholder='Search' variant="outlined" />
     </div>
     <div className="search_btn">
-      <Button sx={{maxWidth:screen500?"100px":"auto"}} onClick={handleSearchClick} variant="contained">Search</Button>
+      <Button  onClick={handleSearchClick} variant="contained">Search</Button>
     </div>
     {isVoiceClicked ? <VoiceAlert setSearchText={setSearchText} transcript={transcript} SpeechRecognition={SpeechRecognition} close={setIsVoiceClicked} />:<></>}
   </> );

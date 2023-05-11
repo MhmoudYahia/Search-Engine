@@ -12,7 +12,7 @@
 .toggle-btn{
   position: absolute;
   left: 1px;
-  top: 70px;
+  top: 20px;
   z-index: 10
 }
 .Home_content{
@@ -98,9 +98,9 @@ position: relative;
   align-items: center;
   gap: 25px;
 }
-.MuiPaper-root[data-theme="light"]{
+/* #light .MuiPaper-root{
   background-color: #e9e9e9 !important;
-}
+} */
 .Voice{
   position: absolute;
   left: 35%;
@@ -129,3 +129,10 @@ position: relative;
   }
 }
 
+#light .logo h1,#light .logo h4{
+ color:#937d69
+}
+
+#dark .logo h1,#dark .logo h4 {
+  color: #eae6e1
+}
