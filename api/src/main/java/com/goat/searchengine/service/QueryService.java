@@ -20,7 +20,8 @@ public class QueryService {
         Query query3=new Query("Yousef Rabia","https://www.linkedin.com/in/yousef-rabia-b260a9201/","Query Processor","This module receives search queries, performs necessary preprocessing and searches the index for relevant\n" +
                 "documents. Retrieve documents containing words that share the same stem with those in the search query. For\n" +
                 "example, the search query “travel” should match (with lower degree) the words “traveler”, “traveling” … etc.");
-        queryList.addAll(Arrays.asList(query1,query2,query3));
+        queryList.addAll(Arrays.asList(query1,query2,query3,query3,query3,query3,query3,query3,query3,query3,query3,query3,query3,
+                query3,query3,query3));
     }
     public List<Query> getQueryResults(String q) {
         return queryList;

@@ -1,6 +1,6 @@
 import './Home.css'
 import * as React from 'react';
-import logo from './web-crawler256.png'
+import logo from './goat (2).png'
 import Searchbar from "./Searchbar";
 import VoiceAlert from './VoiceAlert';
 import Q from './q.png'
@@ -10,7 +10,7 @@ const Home = () => {
     <div className="Home_content">
         <div className="logo">
         <img src={logo} alt="" />
-          <h1 style={{ display: 'flex', fontFamily: 'Comfortaa', fontSize: '62px',fontWeight:'700', color:'#7d8b95'}}>Quester</h1>
+          <h1 style={{ display: 'flex', fontFamily: 'Comfortaa', fontSize: '62px', fontWeight: '700', }}>GOAT</h1>
       </div>
       <Searchbar />
     </div>
