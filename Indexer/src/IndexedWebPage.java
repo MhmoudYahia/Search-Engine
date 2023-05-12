@@ -23,6 +23,8 @@ public class IndexedWebPage {
     String title;
     String disc;
 
+    String paragraph = "NOT A PARAGRAPH";
+
     // positions of this word in this page   (word => pages)
     ArrayList<Integer> WordPositions;
 
@@ -53,7 +55,9 @@ public class IndexedWebPage {
         this.WordPositions.add(new_pos);
         this.incrementTF();
     }
-
+    public void setParagraph(String s){
+            this.paragraph = s;
+    }
     public void normalize(long totalCnt) {
         this.normalized_TF = (double) this.TF / totalCnt;
     }
@@ -87,12 +91,15 @@ public class IndexedWebPage {
     public String getDisc() {
         return disc;
     }
-
+    public String getParagraph(){
+            return this.paragraph;
+    }
     public static DBObject toDocument(IndexedWebPage iWP) {
         return new BasicDBObject("Page_URL", iWP.getUrl())
-//                .append("TF", iWP.getTF())
+                .append("TF", iWP.getTF())
                 .append("Score", iWP.getScore())
-//                .append("Normalized_TF", iWP.get_normalizedTf())
+                .append("<p>",iWP.getParagraph())
+                .append("Normalized_TF", iWP.get_normalizedTf())
                 .append("Word_Positions_In_this_Page", iWP.getWordPositions())
                 .append("Page_Title", iWP.getTitle())
                 .append("Page_Description", iWP.getDisc());
