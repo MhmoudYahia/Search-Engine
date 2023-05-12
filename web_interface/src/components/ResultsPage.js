@@ -18,16 +18,20 @@ const ResultsPage = (props) => {
   const location = useLocation();
   const {target}=useParams();
   const [results,setResults]=React.useState(null);
-
   const query = new URLSearchParams(location.search);
   const page = parseInt(query.get('page') || '1', 10);
-  const { data, isPending, error } = useFetch('http://localhost:8080/?q='+target);
+  const [toSearch, setToSearch] = React.useState('http://localhost:8080/api?text=' + target);
+
+  React.useEffect(()=>{
+    setToSearch('http://localhost:8080/api?text=' + target);
+  },[target]);
+  
+  const { data, isPending, error } = useFetch(toSearch);
   
   const [myResults,setMyResults]=React.useState(null);
   React.useEffect((() => {
       setResults(data);
-      setMyResults(results&&results.slice((page - 1) * 12, (page * 12)));
-
+      setMyResults(data&&data.slice((page - 1) * 12, (page * 12)));
     }),[data,page]);
 
 React.useEffect(() => {
@@ -71,11 +75,12 @@ React.useEffect(() => {
             </>
           }
       {
-      myResults && myResults.map((result,idx) => (
+      !error && myResults && myResults.map((result,idx) => (
       <Result key={idx} target={target} result={result}></Result >))
       }
+      {error && <div className="no-results">No Results found for "{target}"</div> }
       </div> 
-      {myResults && <Content />}
+      {!error && myResults && <Content />}
       
   </div>
   );
