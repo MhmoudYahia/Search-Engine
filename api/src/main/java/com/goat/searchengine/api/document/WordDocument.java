@@ -11,7 +11,7 @@ import java.util.List;
 public class WordDocument {
     @Id
     private String id;
-    private String Wordsss;
+    private String Word;
     @Field("Total_Apperance_in_All_Pages")
     private int Total_Appearance_in_All_Pages;
     @Field("Pages_Containing_This_Word")
@@ -25,11 +25,11 @@ public class WordDocument {
     }
 
     public String getWord() {
-        return Wordsss;
+        return Word;
     }
 
     public void setWord(String word) {
-        this.Wordsss = word;
+        this.Word = word;
     }
 
 
