@@ -20,7 +20,6 @@ public class QueryService {
 //    public static MongoClient mongoClient;
     public QueryService(){
         //setDB();
-        System.out.println("ranker connecting data base.");
 
         queryList=new ArrayList<>();
         Query query1=new Query("Yousef Rabia","https://github.com/Yousef-Rabia","Yousef Rabia Github","I am currently a junior computer engineering student at Cairo university. I am looking forward to\n" +
