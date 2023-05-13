@@ -79,7 +79,6 @@ position: relative;
   display: inline-block;
   width: 250px;
   height: 250px;
-  background-color: #333;
   border-radius: 50%;
   position: absolute;
   top:-90px;
@@ -88,6 +87,13 @@ position: relative;
   animation-name: listen;
   animation-duration: 2s;
   animation-iteration-count: infinite;
+}
+#light .MuiAlert-icon::before{
+    background-color: #937d69;
+}
+#dark .MuiAlert-icon::before{
+    background-color: #eae6e1;
+
 }
 .css-2c1xq-MuiPaper-root-MuiAlert-root{
   min-width: 350px;
@@ -98,9 +104,19 @@ position: relative;
   align-items: center;
   gap: 25px;
 }
-/* #light .MuiPaper-root{
-  background-color: #e9e9e9 !important;
-} */
+#light .css-10s8pkp-MuiPaper-root-MuiAlert-root{
+  background-color: #78634f !important;
+}
+
+.css-10s8pkp-MuiPaper-root-MuiAlert-root{
+  min-width: 350px;
+  min-height: 200px;
+  display: flex;
+  border-radius: 45px !important;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
 .Voice{
   position: absolute;
   left: 35%;
@@ -135,4 +151,17 @@ position: relative;
 
 #dark .logo h1,#dark .logo h4 {
   color: #eae6e1
+}
+
+#dark .no-results{
+    color: #eae6e1
+}
+#light .no-results{
+  color: #78634f;
+}
+#light .css-10s8pkp-MuiPaper-root-MuiAlert-root .MuiAlert-icon{
+  color:#574330 !important;
+}
+#dark .css-2c1xq-MuiPaper-root-MuiAlert-root .MuiAlert-icon{
+  color: #937d69 !important;
 }

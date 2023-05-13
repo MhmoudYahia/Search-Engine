@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import './Home.css'
 import { useNavigate } from "react-router-dom"
-import logo from './goat (2).png'
+import logo from './Photos/goat (2).png'
 import Searchbar from "./Searchbar";
 
 
