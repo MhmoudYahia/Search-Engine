@@ -68,10 +68,4 @@ public class Main {
         System.out.println("addedd dirictly "+indexer.tempcnt);
         System.out.println("Finished Adding to the data base.");
     }
-
-
-
-
-
-
 }

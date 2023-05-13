@@ -223,7 +223,7 @@ public class indexer implements Runnable {
 
                     for (Element element : elements) {
                         String tagName = element.tagName();
-                        String text = element.ownText()+" ";
+                        String text = element.text()+" ";
                         if (tagName.equals("h1")) {
                             h1Text+=text;
                         }
@@ -293,9 +293,10 @@ public class indexer implements Runnable {
                         }
 
                         //set the paragraph
-                        Elements p_elements = doc.select("p, span, br, em, strong");
+                        Elements p_elements = doc.select("p");
                         for (Element element : p_elements) {
-                            String text = element.ownText();
+                            String _text = element.text();
+                            String text = _text.toLowerCase();
                             if(isContain(text,entry.getKey())){
                                 entry.getValue().setParagraph(text);
                                 break;
