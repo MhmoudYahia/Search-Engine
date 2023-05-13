@@ -1,9 +1,9 @@
 import './Home.css'
 import * as React from 'react';
-import logo from './goat (2).png'
+import logo from './Photos/goat (2).png'
 import Searchbar from "./Searchbar";
 import VoiceAlert from './VoiceAlert';
-import Q from './q.png'
+import Q from './Photos/q.png'
 const Home = () => {
   return ( 
   <div className="Home_Container">

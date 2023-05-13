@@ -1,23 +1,25 @@
 import Alert from '@mui/material/Alert';
 import MicNoneIcon from '@mui/icons-material/MicNone';
 import { useState, useEffect, useRef } from "react";
+import * as React from "react"
 import { AlertTitle } from '@mui/material';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 import Button from '@mui/material/Button';
 const VoiceAlert = (props) => {
-
     const handleStopClick=(e)=>{
     props.SpeechRecognition.stopListening();
     props.setSearchText(props.transcript);
     props.close(false);
   }
-  return (<>
+  return (
+  props.listening&&
+    <>
     <div className='Voice' >
-      <Alert severity="info" icon={<MicNoneIcon sx={{ fontSize: '56px', }} />}>
-        <AlertTitle sx={{ fontSize: '24px' }}>Speak Now...</AlertTitle>
-        <p style={{padding:'5px'}}>{props.transcript}..</p>
-        <Button onClick={handleStopClick} variant="outlined">Stop!</Button>
+      <Alert severity="info" icon={<MicNoneIcon sx={{  fontSize: '56px', }} />}>
+        <AlertTitle sx={{ color:'white',fontSize: '24px' }}>Speak Now...</AlertTitle>
+        <p style={{ padding: '5px', color: 'white' }}>{props.transcript}..</p>
+        <Button  onClick={handleStopClick} variant="contained">Stop!</Button>
       </Alert>
     </div> 
   </>
