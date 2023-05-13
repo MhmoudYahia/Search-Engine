@@ -19,6 +19,14 @@ public class CrawlerIMP implements Runnable {
     private HashSet<String> Vis;
     private Queue<String>Seed;
     private RobotParser RP;
+    FileWriter fwQ = null;
+    BufferedWriter bwQ = null;
+    PrintWriter pwQ = null;
+    FileWriter fwT = null;
+    BufferedWriter bwT = null;
+    PrintWriter pwT = null;
+
+
     AtomicInteger idx;
 
     public CrawlerIMP(String path) {
@@ -26,10 +34,42 @@ public class CrawlerIMP implements Runnable {
         Seed=new LinkedList<>();
         idx=new AtomicInteger(0);
         RP=new RobotParser();
-        readSeed(path);
+        BufferedReader bf=null;
+        BufferedReader bfQ=null;
+        int stopIdx;
+
+        try {
+            fwQ = new FileWriter("./Crawler/Seed/queue.txt", true);
+            bwQ = new BufferedWriter(fwQ);
+            pwQ = new PrintWriter(bwQ);
+            bf=new BufferedReader(new FileReader("./Crawler/Seed/num.txt"));
+            bfQ=new BufferedReader(new FileReader("./Crawler/Seed/queue.txt"));
+
+            String str=null;
+            if((str=bf.readLine())!=null){
+                stopIdx=Integer.parseInt(str);
+                idx.set(stopIdx+1);
+                int temp=0;
+                while((str= bfQ.readLine())!=null){
+                    if(temp>stopIdx)
+                        Seed.add(str);
+                    Vis.add(str);
+                    temp++;
+                }
+            }
+            else{
+                readSeed(path);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void StartCrawelling() {
+
+
+
         String curLink;
         Document doc=null;
         List<String>childLinks=null;
@@ -64,7 +104,11 @@ public class CrawlerIMP implements Runnable {
                 DownloadPage(doc);
                 for(String li:childLinks) {
                     if(Vis.add(li)) {
-                        Seed.add(li);
+                        if(Seed.add(li));
+                            pwQ.println(li);
+                            pwQ.flush();
+
+
                     }
                 }
                 notifyAll();
@@ -93,6 +137,11 @@ public class CrawlerIMP implements Runnable {
     private void DownloadPage(Document doc) {
         try {
             int id=idx.getAndSet(idx.intValue()+1);
+            fwT = new FileWriter("./Crawler/Seed/num.txt", false);
+            bwT = new BufferedWriter(fwT);
+            pwT = new PrintWriter(bwT);
+            pwT.print(id);
+            pwT.flush();
             File dir=new File("Crawler/Files/"+id);
             while(!dir.mkdir()){
                 deleteDir(dir);
@@ -121,6 +170,8 @@ public class CrawlerIMP implements Runnable {
                 link=sc.nextLine();
                 Seed.add(link);
                 Vis.add(link);
+                pwQ.println(link);
+                pwQ.flush();
             }
 
             sc.close();

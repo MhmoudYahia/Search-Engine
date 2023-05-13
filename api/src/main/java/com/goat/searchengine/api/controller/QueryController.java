@@ -107,7 +107,7 @@ public class QueryController {
         if(index != -1)
         {
             int start = Math.max(index - 10, 0);
-            int end = Math.min(index + 10,size);
+            int end = Math.min(index + 20,size);
             for(int i = start; i<end;i++)
             {
                 result.append(words[i]).append(" ");
