@@ -13,7 +13,7 @@ public class Main {
             File current_file = new File("currentFile.txt");
             try (Scanner myScanner = new Scanner(current_file)) {
                 if (myScanner.hasNext()) {
-                    lastFileOpened = myScanner.nextInt() + 1;
+                    lastFileOpened = myScanner.nextInt();
                 }
             }
            current_file.delete();
@@ -57,7 +57,7 @@ public class Main {
 
         //insert in DB
 
-        if(lastFileOpened ==1){
+        if(lastFileOpened == 0){
             indexer.webpagesCollection.insert(new BasicDBObject("info","Doc_meta_data" ).append("Doc_Cnt",indexer.fileCnt));
         }else{
             BasicDBObject update = new BasicDBObject("$inc", new BasicDBObject("Doc_Cnt", indexer.fileCnt));

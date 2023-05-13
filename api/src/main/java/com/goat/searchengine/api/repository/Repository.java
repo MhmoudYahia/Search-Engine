@@ -12,6 +12,9 @@ public interface Repository extends MongoRepository<WordDocument, String> {
     @Query("{'Word' : ?0}")
     WordDocument findByWord(String word);
 
+    @Query("{'stemmedWord' : ?0}")
+    WordDocument[] findByStemmedWord(String word);
+
     @Query("{'info':'Doc_meta_data'}")
     Object getDocMetaData();
 }

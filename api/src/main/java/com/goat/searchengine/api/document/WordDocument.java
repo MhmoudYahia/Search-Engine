@@ -9,9 +9,11 @@ import java.util.List;
 
 @Document(collection = "web_pages")
 public class WordDocument {
+
     @Id
     private String id;
     private String Word;
+    private String stemmedWord;
     @Field("Total_Apperance_in_All_Pages")
     private int Total_Appearance_in_All_Pages;
     @Field("Pages_Containing_This_Word")
@@ -32,6 +34,13 @@ public class WordDocument {
         this.Word = word;
     }
 
+    public String getStemmedWord() {
+        return stemmedWord;
+    }
+
+    public void setStemmedWord(String stemmedWord) {
+        this.stemmedWord = stemmedWord;
+    }
 
     public int getTotal_Appearance_in_All_Pages() {
         return Total_Appearance_in_All_Pages;

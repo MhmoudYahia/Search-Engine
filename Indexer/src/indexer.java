@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import com.mongodb.client.model.IndexOptions;
@@ -139,7 +141,6 @@ public class indexer implements Runnable {
 
         try {
 
-
            int curr_file = Main.lastFileOpened;
            current_Index+=Main.lastFileOpened;
             while(curr_file <= fileCnt ) {
@@ -149,6 +150,7 @@ public class indexer implements Runnable {
                     File htmlFile = new File("Crawler/Files/"+current_Index+"/"+current_Index+".html");
                     String ParsedStr = Jsoup.parse(htmlFile, null).text();
 
+                    String OriginalStr = processStringWithoutStemming(ParsedStr, stopWords);
                     String StemmedStr = processStringWithStemming(ParsedStr, stopWords);
  //                   String nonStemmedStr = processStringWithoutStemming(ParsedStr, stopWords);
  //                   String[] nonStmdWords = nonStemmedStr.split(" ");
@@ -168,18 +170,19 @@ public class indexer implements Runnable {
                         e.printStackTrace();
                     }
 
-//                    System.out.println("URL#"+current_Index +" : "+linkURL);
+//                   System.out.println("URL#"+current_Index +" : "+linkURL);
                     String title = "";
                     String desc = "";
                     int score = 0;
                     Document doc = null;
                     // word => page
-                    for (String str : StemmedStr.split(" ")) {
+                    String stemmedWords[] = StemmedStr.split(" ");
+                    for (String str : OriginalStr.split(" ")) {
                         if (wordsHashMap.containsKey(str)) {
                             wordsHashMap.get(str).addPosition(words_i);
                         } else {
 //                            stemmedToNonStemmedMap.put(str, nonStmdWords[words_i]);
-                            wordsHashMap.put(str, new IndexedWebPage(linkURL, words_i));
+                            wordsHashMap.put(str, new IndexedWebPage(linkURL, words_i, stemmedWords[words_i]));
                         }
                         words_i++;
                     }
@@ -209,86 +212,99 @@ public class indexer implements Runnable {
 //                        }
 //                    }
                     //headings
-                    Elements elements = doc.select("h1, h2, h3, h4 , h5, h6, body,p");
+                    Elements elements = doc.select("h1, h2, h3, h4, h5, h6");
                     String h1Text = "";
                     String h2Text = "";
                     String h3Text = "";
                     String h4Text = "";
                     String h5Text = "";
                     String h6Text = "";
-                    String bodyText = "";
-                    String PText = "";
 
 
                     for (Element element : elements) {
                         String tagName = element.tagName();
-                        String text = element.ownText();
+                        String text = element.ownText()+" ";
                         if (tagName.equals("h1")) {
-                            h1Text=text;
-                        } else if (tagName.equals("h2")) {
-                            h2Text=text;
-                        } else if (tagName.equals("h3")) {
-                            h3Text=text;
+                            h1Text+=text;
+                        }
+                        else if (tagName.equals("h2")) {
+                            h2Text+=text;
+                        }
+                        else if (tagName.equals("h3")) {
+                            h3Text += text;
                         }
                         else if (tagName.equals("h4")) {
-                            h4Text=text;
+                            h4Text += text;
                         }
                         else if (tagName.equals("h5")) {
-                            h5Text=text;
+                            h5Text += text;
                         }
                         else if (tagName.equals("h6")) {
-                            h6Text=text;
-                        }
-                      else if (tagName.equals("body")) {
-                            bodyText=text;
+                            h6Text += text;
                         }
                     }
 
+                    h1Text = processStringWithoutStemming(h1Text,stopWords);
+                    h2Text = processStringWithoutStemming(h2Text,stopWords);
+                    h3Text = processStringWithoutStemming(h3Text,stopWords);
+                    h4Text = processStringWithoutStemming(h4Text,stopWords);
+                    h5Text = processStringWithoutStemming(h5Text,stopWords);
+                    h6Text = processStringWithoutStemming(h6Text,stopWords);
+                    String titleText = processStringWithoutStemming(title, stopWords);
+
                     //loop on all words of this link
                     for (Map.Entry<String, IndexedWebPage> entry : wordsHashMap.entrySet()) {
+                        score = 0;
                         if (entry.getKey() == null || "".equals(entry.getKey())) {
                             break;
                         }
                         if( isNumeric(entry.getKey()) || entry.getKey().length() == 1){
                             continue;
                         }
-                        //get p
-
-
 
 //                         decide score
-
-                        if(h1Text.contains(entry.getKey())){
-                            score = Constants.h1Score;
-                        } else if(h2Text.contains( entry.getKey())){
-                            score = Constants.h2Score;
-                        }else if(h3Text.contains( entry.getKey())){
-                            score = Constants.h3Score;
-                        }else if(h4Text.contains( entry.getKey())){
-                            score = Constants.h4Score;
-                        }else if(h5Text.contains( entry.getKey())){
-                            score = Constants.h5Score;
-                        }else if(h6Text.contains( entry.getKey())){
-                            score = Constants.h6Score;
-                        }else if(bodyText.contains( entry.getKey())){
-                            score = Constants.bodyScore;
+                        while(isContain(h1Text,entry.getKey())){
+                            score += Constants.h1Score;
+                            h1Text = h1Text.replaceFirst(entry.getKey(),"");
+                        }
+                        while(isContain(h2Text,entry.getKey())){
+                            score += Constants.h2Score;
+                            h2Text = h2Text.replaceFirst(entry.getKey(),"");
+                        }
+                        while(isContain(h3Text,entry.getKey())){
+                            score += Constants.h3Score;
+                            h3Text = h3Text.replaceFirst(entry.getKey(),"");
+                        }
+                        while(isContain(h4Text,entry.getKey())){
+                            score += Constants.h4Score;
+                            h4Text = h4Text.replaceFirst(entry.getKey(),"");
+                        }
+                        while(isContain(h5Text,entry.getKey())){
+                            score += Constants.h5Score;
+                            h5Text = h5Text.replaceFirst(entry.getKey(),"");
+                        }
+                        while(isContain(h6Text,entry.getKey())){
+                            score += Constants.h6Score;
+                            h6Text = h6Text.replaceFirst(entry.getKey(),"");
+                        }
+                        while(isContain(titleText,entry.getKey())){
+                            score += Constants.TScore;
+                            titleText = titleText.replaceFirst(entry.getKey(),"");
                         }
 
-                        //set p
-                        Elements p_elements = doc.select("p");
-                        //System.out.println(p_elements);
-                        for (Element element : elements) {
+                        //set the paragraph
+                        Elements p_elements = doc.select("p, span, br, em, strong");
+                        for (Element element : p_elements) {
                             String text = element.ownText();
-                            if(text.contains(entry.getKey())){
+                            if(isContain(text,entry.getKey())){
                                 entry.getValue().setParagraph(text);
-                                score = Constants.PScore;
                                 break;
                             }
                         }
                         //set to indexed word
                         entry.getValue().setTitle(title);
                         entry.getValue().setDesc(desc);
-                        entry.getValue().normalize(StemmedStr.length());
+                        entry.getValue().normalize(OriginalStr.length());
                         entry.getValue().setScore(score);
                         //add to DB
                         synchronized (indexer.class) {
@@ -332,7 +348,7 @@ public class indexer implements Runnable {
             e.printStackTrace();
         }
         System.out.println("Thread#"+th_id+ " finished indexing");
-        System.out.println("finished Docs untill now: "+ documentCount);
+        System.out.println("finished Docs until now: "+ documentCount);
     }
 
     //return a clean, preprocessed and stemmed string
@@ -394,5 +410,12 @@ public class indexer implements Runnable {
             return false;
         }
         return true;
+    }
+
+    private static boolean isContain(String source, String subItem){
+        String pattern = "\\b"+subItem+"\\b";
+        Pattern p=Pattern.compile(pattern);
+        Matcher m=p.matcher(source);
+        return m.find();
     }
 }

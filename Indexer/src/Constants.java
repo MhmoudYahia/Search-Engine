@@ -5,18 +5,13 @@ public class Constants {
     public static final int NUM_THREADS = 10;
 
     //score
-    public static final int h1Score = 1;
-    public static final int h2Score = 2;
-    public static final int h3Score = 3;
-    public static final int h4Score = 4;
-    public static final int h5Score = 5;
-
-    public static final int h6Score = 6;
-
-    public static final int PScore = 7;
-    public static final int bodyScore = 8;
-
-
+    public static final int h1Score = 12;
+    public static final int h2Score = 10;
+    public static final int h3Score = 8;
+    public static final int h4Score = 6;
+    public static final int h5Score = 4;
+    public static final int h6Score = 2;
+    public static final int TScore = 20;
 
 
     /**
