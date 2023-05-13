@@ -75,12 +75,12 @@ React.useEffect(() => {
             </>
           }
       {
-      !error && myResults && myResults.map((result,idx) => (
+          !error&& myResults&& myResults.length!==0 && myResults.map((result,idx) => (
       <Result key={idx} target={target} result={result}></Result >))
       }
-      {error && <div className="no-results">No Results found for "{target}"</div> }
+      {myResults&&myResults.length===0 && <div className="no-results">No Results found for "{target}"</div> }
       </div> 
-      {!error && myResults && <Content />}
+      {myResults &&myResults.length !== 0 && <Content />}
       
   </div>
   );
