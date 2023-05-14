@@ -19,6 +19,7 @@ public class Constants {
      */
     public static final String DATABASE_NAME = "search_engine";
     public static final String DATABASE_HOST_ADDRESS = "localhost";
+    public static final String DATABASE_URI = "mongodb+srv://YousefRabia:Goat10@cluster0.wy22fj9.mongodb.net/?retryWrites=true&w=majority";
     public static final int DATABASE_PORT_NUMBER = 27017;
 
     /**
