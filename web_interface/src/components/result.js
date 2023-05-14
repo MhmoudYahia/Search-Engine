@@ -8,7 +8,6 @@ const Result = (props) => {
   searchText = searchText.replaceAll("\"", "");
   const targetWords = searchText.split(" ");
   var displayText =Result.paragraph?Result.paragraph:Result.description;
-  console.log(Result.paragraph);
   var parser = document.createElement('a');
   parser.href = Result.url;
   var siteName=parser.hostname;

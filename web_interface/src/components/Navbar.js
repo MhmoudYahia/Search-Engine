@@ -19,7 +19,7 @@ const Navbar = (props) => {
             <h4 style={{
               display: 'flex', alignItems: 'center', fontFamily: 'Comfortaa', fontSize: '27px', fontWeight: '700', }}>GOAT</h4>
           </div>
-          <Searchbar target={props.target} />
+          <Searchbar setIsPending={props.setIsPending} target={props.target} />
         </Toolbar>
       </Container>
     </AppBar>

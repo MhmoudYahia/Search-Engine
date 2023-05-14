@@ -21,6 +21,20 @@
   flex-direction: column;
   gap: 12px;
 }
+.speedInfo{
+  max-width: 800px;
+  padding-left: 10%;
+  margin-right: 10%;
+  font-size: 14px;
+}
+#dark .speedInfo{
+  color: #bdc1c6;
+
+}
+
+#light .speedInfo{
+  color: #4d5156;
+}
 .logo{
   display: flex;
   flex-direction: column;
