@@ -1,7 +1,5 @@
 
 import com.mongodb.*;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -76,8 +74,8 @@ public class indexer implements Runnable {
 //        System.out.println("Finished Adding to the data base.");
 //    }
     public static void setDB() {
-
-        mongoClient = new MongoClient(Constants.DATABASE_HOST_ADDRESS, Constants.DATABASE_PORT_NUMBER);
+        MongoClientURI clientURI = new MongoClientURI(Constants.DATABASE_URI);
+        mongoClient = new MongoClient(clientURI);
         database = mongoClient.getDB(Constants.DATABASE_NAME);
         if(Main.lastFileOpened == 1) {
             System.out.println("starting new data base.");

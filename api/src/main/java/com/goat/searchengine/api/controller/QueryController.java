@@ -3,18 +3,16 @@ package com.goat.searchengine.api.controller;
 import com.goat.searchengine.api.document.WordDocument;
 import com.goat.searchengine.api.model.Query;
 import com.goat.searchengine.api.repository.Repository;
-import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.tartarus.snowball.ext.porterStemmer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.Math;
 import java.util.*;
-import org.tartarus.snowball.ext.porterStemmer;
 
 
 @RestController
@@ -26,19 +24,6 @@ public class QueryController {
 
     //max allowed gap between 2 words in phrase searching
     int phrase_gap = 10;
-
-
-//    private QueryService queryService;
-//
-//    @Autowired
-//    public QueryController(QueryService queryService){
-//        this.queryService=queryService;
-//    }
-//    @GetMapping("/")
-//    public List<Query> getResult(@RequestParam String q){
-//
-//        return queryService.getQueryResults(q);
-//    }
 
     public static String processStringWithStemming(String txt, String stopWords) {
 
@@ -83,7 +68,7 @@ public class QueryController {
             }
         } catch (FileNotFoundException e) {
             //Print an error message if an exception is thrown
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred in loadStopWords.");
         }
         return stopWords;
     }
