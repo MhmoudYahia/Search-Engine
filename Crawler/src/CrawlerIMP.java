@@ -58,6 +58,10 @@ public class CrawlerIMP implements Runnable {
                 }
             }
             else{
+                BufferedWriter bw=new BufferedWriter(new FileWriter("./currentFile.txt",false));
+                PrintWriter fw=new PrintWriter(bw);
+                fw.println(0);
+                fw.close();
                 readSeed(path);
             }
         } catch (IOException e) {
