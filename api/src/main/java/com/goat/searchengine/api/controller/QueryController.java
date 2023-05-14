@@ -68,7 +68,7 @@ public class QueryController {
             }
         } catch (FileNotFoundException e) {
             //Print an error message if an exception is thrown
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred in loadStopWords.");
         }
         return stopWords;
     }
@@ -327,9 +327,4 @@ public List<Query> search(String text)
     }
     return results;
 }
-    @GetMapping("/lol")
-    public List<WordDocument> test()
-    {
-        return repository.findAll();
-    }
 }
