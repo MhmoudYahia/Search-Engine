@@ -16,10 +16,9 @@ public class Main {
             File current_file = new File("currentFile.txt");
             try (Scanner myScanner = new Scanner(current_file)) {
                 if (myScanner.hasNext()) {
-                    lastFileOpened = myScanner.nextInt() + 1;
+                    lastFileOpened = myScanner.nextInt();
                 }
             }
-           current_file.delete();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -27,7 +26,7 @@ public class Main {
        //set Data base
        indexer.setDB();
        loadScores();
-//
+
         System.out.println("start at file#"+lastFileOpened);
         Thread[] thrds = new Thread[Constants.NUM_THREADS];
         indexer indexer = new indexer();

@@ -30,17 +30,14 @@ public class QueryController {
     int phrase_gap = 10;
 
 
-//    private QueryService queryService;
-//
-//    @Autowired
-//    public QueryController(QueryService queryService){
-//        this.queryService=queryService;
-//    }
-//    @GetMapping("/")
-//    public List<Query> getResult(@RequestParam String q){
-//
-//        return queryService.getQueryResults(q);
-//    }
+    public static boolean isNumeric(String str) {
+        try {
+            double d = Double.parseDouble(str);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
 
     public static String processStringWithStemming(String txt, String stopWords) {
 
@@ -223,11 +220,14 @@ public class QueryController {
 
                 for (DBObject obj : arr) {
                     String url = (String) obj.get("Page_URL");
+                    double popularity = 0;
+                    if((String)obj.get("Popularity") != null)
+                        popularity = Double.parseDouble((String)obj.get("Popularity"));
                     double tf = (double) obj.get("Normalized_TF");
                     int tag_score = (int)obj.get("Score");
 
                     double tf_idf = tf * idf;
-                    double final_score = tf_idf + tf_idf * tag_score;
+                    double final_score = tf_idf * (1 + tag_score + popularity);
                     double score = map.containsKey(url) ? map.get(url).getSecond() : 0;
                     DBObject current_obj = map.containsKey(url) ? map.get(url).getFirst() : null;
 
@@ -240,7 +240,8 @@ public class QueryController {
                             continue;
                         obj.put("count", (int) current_obj.get("count") + 1);
                         current_obj.put("count",(int) current_obj.get("count") + 1);
-
+                        if((int)obj.get("count") == 2)
+                            System.out.println(word);
                         String current_paragraph = (String)current_obj.get("<p>");
                         Pair<DBObject, Double> pair;
                         if(current_paragraph.equals(""))
@@ -321,12 +322,15 @@ public class QueryController {
                 for (DBObject obj : arr) {
                     String url = (String) obj.get("Page_URL");
                     double tf = (double) obj.get("Normalized_TF");
+                    double popularity = 0;
+                    if((String)obj.get("Popularity") != null)
+                        popularity = Double.parseDouble((String)obj.get("Popularity"));
                     int tag_score = (int)obj.get("Score");
                     double tf_idf = tf * idf;
-                    double final_score = tf_idf + tf_idf * tag_score;
+                    double final_score = tf_idf * (1 + tag_score + popularity);
 
                     //bonus score if it's the exact word and not a stem of it
-                    if(item.getWord().equals(non_stemmed_words[word_index]))
+                    if(!isNumeric(item.getWord()) && item.getWord().equals(non_stemmed_words[word_index]))
                     {
                         final_score *= 100;
                     }
@@ -439,7 +443,6 @@ public List<Query> search(String text)
         results.add(normal_search(text));
     }
     Collections.sort(results.get(0));
-    System.out.println(results.get(0).size());
     return results.get(0);
 }
 }
