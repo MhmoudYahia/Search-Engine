@@ -229,7 +229,7 @@ public class indexer implements Runnable {
                         }
 
                         if(isContain( aText,entry.getKey())||isContain( metaText,entry.getKey())||isContain( buttonText,entry.getKey())){
-                           System.out.println("not included: "+ entry.getKey());
+
                             continue;
                         }
 
