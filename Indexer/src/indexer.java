@@ -49,7 +49,9 @@ public class indexer implements Runnable {
 
     public static void setDB() {
 
-        mongoClient = new MongoClient(Constants.DATABASE_HOST_ADDRESS, Constants.DATABASE_PORT_NUMBER);
+        //mongoClient = new MongoClient(Constants.DATABASE_HOST_ADDRESS, Constants.DATABASE_PORT_NUMBER);
+        MongoClientURI clientURI = new MongoClientURI(Constants.DATABASE_URI);
+        mongoClient = new MongoClient(clientURI);
         database = mongoClient.getDB(Constants.DATABASE_NAME);
         if(Main.lastFileOpened == 1) {
             System.out.println("starting new data base.");
@@ -353,6 +355,7 @@ public class indexer implements Runnable {
             return "";
         String processd_txt = "";
         txt = txt.replaceAll("[^a-zA-Z0-9 ]", "");
+        txt = txt.replaceAll("\\b\\w{16,}\\b", "");
         txt = txt.replaceAll("\\b(?=\\w*\\d)(?=\\w*[a-zA-Z])\\w+\\b", "");
         //txt = txt.replaceAll("\\b(?=.*\\d)(?=.*[a-zA-Z])[\\w\\d]+\\b", "");
         txt = txt.replaceAll("\\s+", " ");
