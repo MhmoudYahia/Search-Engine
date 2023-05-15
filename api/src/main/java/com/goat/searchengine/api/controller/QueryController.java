@@ -220,8 +220,9 @@ public class QueryController {
 
                 for (DBObject obj : arr) {
                     String url = (String) obj.get("Page_URL");
-                    //double popularity = (double) obj.get("popularity");
                     double popularity = 0;
+                    if((String)obj.get("Popularity") != null)
+                        popularity = Double.parseDouble((String)obj.get("Popularity"));
                     double tf = (double) obj.get("Normalized_TF");
                     int tag_score = (int)obj.get("Score");
 
@@ -321,8 +322,9 @@ public class QueryController {
                 for (DBObject obj : arr) {
                     String url = (String) obj.get("Page_URL");
                     double tf = (double) obj.get("Normalized_TF");
-                    //double popularity = (double) obj.get("popularity");
                     double popularity = 0;
+                    if((String)obj.get("Popularity") != null)
+                        popularity = Double.parseDouble((String)obj.get("Popularity"));
                     int tag_score = (int)obj.get("Score");
                     double tf_idf = tf * idf;
                     double final_score = tf_idf * (1 + tag_score + popularity);

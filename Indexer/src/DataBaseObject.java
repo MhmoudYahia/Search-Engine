@@ -10,6 +10,7 @@ import com.mongodb.DBObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 /**
  *
@@ -21,7 +22,8 @@ public final class DataBaseObject {
 
     String stemmedWord;
     int cnt = 0;
-    ArrayList<DBObject> pageData = new ArrayList<>();
+    //ArrayList<DBObject> pageData = new ArrayList<>();
+    LinkedHashSet<DBObject> pageData = new LinkedHashSet<>();
 
     public DataBaseObject(String w, IndexedWebPage wp) {
         this.setWord(w);
@@ -43,7 +45,7 @@ public final class DataBaseObject {
 
     public void addPage(IndexedWebPage indexerdWP) {
         this.pageData.add(IndexedWebPage.toDocument(indexerdWP));
-        cnt++;
+        cnt = this.pageData.size();
     }
 
     public DBObject convertToDocument() {

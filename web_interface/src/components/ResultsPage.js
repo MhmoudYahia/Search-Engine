@@ -20,13 +20,13 @@ const ResultsPage = (props) => {
   const [results,setResults]=React.useState(null);
   const query = new URLSearchParams(location.search);
   const page = parseInt(query.get('page') || '1', 10);
-  const [toSearch, setToSearch] = React.useState('http://localhost:8080/api?text=' + target);
+  const [toSearch, setToSearch] = React.useState('http://localhost:8081/api?text=' + target);
   const [myResults, setMyResults] = React.useState(null);
 
   const { data, isPending, error,time,setIsPending } = useFetch(toSearch);
   React.useEffect(() => {
     setMyResults(null)
-    setToSearch('http://localhost:8080/api?text=' + target);
+    setToSearch('http://localhost:8081/api?text=' + target);
   }, [target]);
   React.useEffect((() => {
       setResults(data);
