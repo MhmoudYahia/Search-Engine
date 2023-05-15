@@ -84,7 +84,7 @@ public class CrawlerIMP implements Runnable {
     public void StartCrawelling() {
         String curLink;
         Document doc=null;
-        List<String>childLinks=null;
+        HashSet<String>childLinks=new HashSet<>();
         while(true) {
             synchronized(this) {
                 while(Seed.isEmpty()) {
@@ -115,16 +115,18 @@ public class CrawlerIMP implements Runnable {
             synchronized(this) {
                 DownloadPage(doc);
                 if(childLinks!=null){
+                    double baseRank=Rank.get(curLink).doubleValue();
+                    System.out.println(baseRank);
                     for(String li:childLinks) {
                         if(Vis.add(li)) {
-                            Rank.put(li,0.2*Rank.get(curLink).doubleValue());
+                            Rank.put(li,0.2*baseRank);
                             if(Seed.add(li));
                             {
                                 pwQ.println(li);
                                 pwQ.flush();
                             }
                         }else{
-                            Rank.put(li,Rank.get(li)+0.2*Rank.get(curLink).doubleValue());
+                            Rank.put(li,Rank.get(li)+0.2*baseRank);
                         }
                     }
                 }
@@ -133,8 +135,8 @@ public class CrawlerIMP implements Runnable {
         }
     }
 
-    private List<String> getLinks(Document doc) {
-        List<String> links=new ArrayList<>();
+    private HashSet<String> getLinks(Document doc) {
+        HashSet<String> links=new HashSet<>();
         Elements linksInside=doc.select("a[href]");
         for(Element element: linksInside) {
             String childLink=element.attr("abs:href");
