@@ -372,9 +372,9 @@ public class indexer implements Runnable {
     public static String processStringWithoutStemming(String txt, String stopWords) {
 
         String processd_txt = "";
-        txt = txt.replaceAll("[^a-zA-Z0-9_ ]", "");
+        txt = txt.replaceAll("[^a-zA-Z0-9]", "");
         txt = txt.replaceAll("\\s+", " ");
-        txt = txt.toLowerCase();                                    //
+        txt = txt.toLowerCase();
         processd_txt = txt.replaceAll("\\b(" + stopWords + ")\\b\\s?", "");  // this wrapper for (word1 | word2 | ....)
         return processd_txt;
     }
@@ -409,6 +409,25 @@ public class indexer implements Runnable {
             return false;
         }
         return true;
+    }
+    public static boolean containsCharsAndNumbers(String str) {
+        boolean hasChars = false;
+        boolean hasNumbers = false;
+
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (Character.isLetter(c)) {
+                hasChars = true;
+            } else if (Character.isDigit(c)) {
+                hasNumbers = true;
+            }
+
+            if (hasChars && hasNumbers) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static boolean isContain(String source, String subItem){
