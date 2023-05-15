@@ -36,12 +36,12 @@ public class CrawlerIMP implements Runnable {
         int stopIdx;
 
         try {
-            pwQ = new PrintWriter(new BufferedWriter(new FileWriter("./Crawler/Seed/queue.txt", true)));
-            bf=new BufferedReader(new FileReader("./Crawler/Seed/num.txt"));
-            bfQ=new BufferedReader(new FileReader("./Crawler/Seed/queue.txt"));
-            File f=new File("./Crawler/Seed/Scores.txt");
+            pwQ = new PrintWriter(new BufferedWriter(new FileWriter("Crawler/Seed/queue.txt", true)));
+            bf=new BufferedReader(new FileReader("Crawler/Seed/num.txt"));
+            bfQ=new BufferedReader(new FileReader("Crawler/Seed/queue.txt"));
+            File f=new File("Crawler/Seed/Scores.txt");
             if(f.exists())
-                bfS=new BufferedReader(new FileReader("./Crawler/Seed/Scores.txt"));
+                bfS=new BufferedReader(new FileReader("Crawler/Seed/Scores.txt"));
 
             Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
             String str=null;
@@ -69,7 +69,7 @@ public class CrawlerIMP implements Runnable {
                 }
             }
             else{
-                BufferedWriter bw=new BufferedWriter(new FileWriter("./currentFile.txt",false));
+                BufferedWriter bw=new BufferedWriter(new FileWriter("currentFile.txt",false));
                 PrintWriter fw=new PrintWriter(bw);
                 fw.println(0);
                 fw.close();
@@ -111,9 +111,9 @@ public class CrawlerIMP implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            DownloadPage(doc);
 
             synchronized(this) {
-                DownloadPage(doc);
                 if(childLinks!=null){
                     double baseRank=Rank.get(curLink).doubleValue();
                     double offset=baseRank/childLinks.size();
@@ -158,7 +158,7 @@ public class CrawlerIMP implements Runnable {
     private void DownloadPage(Document doc) {
         try {
             int id=idx.getAndSet(idx.intValue()+1);
-            pwT = new PrintWriter(new BufferedWriter(new FileWriter("./Crawler/Seed/num.txt", false)));
+            pwT = new PrintWriter(new BufferedWriter(new FileWriter("Crawler/Seed/num.txt", false)));
             pwT.print(id);
             pwT.flush();
             File dir=new File("Crawler/Files/"+id);
@@ -201,7 +201,7 @@ public class CrawlerIMP implements Runnable {
     }
     static public void handleSTP(){
         try {
-            PrintWriter ff=new PrintWriter(new BufferedWriter(new FileWriter("./Crawler/Seed/Scores.txt")));
+            PrintWriter ff=new PrintWriter(new BufferedWriter(new FileWriter("Crawler/Seed/Scores.txt")));
             for (Map.Entry<String,Double> e:
                  Rank.entrySet()) {
                 ff.println(e.getKey());

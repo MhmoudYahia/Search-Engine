@@ -5,7 +5,7 @@ public class CrawlerTester {
     final static int num_threads=6;
     public static void main(String[] args) {
 
-        CrawlerIMP CR=new CrawlerIMP("./Crawler/Seed/Seed.txt");
+        CrawlerIMP CR=new CrawlerIMP("Crawler/Seed/Seed.txt");
 
         Signal sigInt = new Signal("INT");
         final SignalHandler oldHandler = Signal.handle(sigInt, SignalHandler.SIG_DFL );
