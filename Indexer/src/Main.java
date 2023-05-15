@@ -16,7 +16,7 @@ public class Main {
             File current_file = new File("currentFile.txt");
             try (Scanner myScanner = new Scanner(current_file)) {
                 if (myScanner.hasNext()) {
-                    lastFileOpened = myScanner.nextInt();
+                    lastFileOpened = myScanner.nextInt() + 1;
                 }
             }
            current_file.delete();

@@ -102,7 +102,7 @@ public class IndexedWebPage {
         return new BasicDBObject("Page_URL", iWP.getUrl())
                 .append("TF", iWP.getTF())
                 .append("Score", iWP.getScore())
-                .append("Popularity",  Main.Link_Score_Map.get(iWP.getUrl()))
+                .append("Popularity", Main.Link_Score_Map.get(iWP.getUrl()))
                 .append("<p>",iWP.getParagraph())
                 .append("Normalized_TF", iWP.get_normalizedTf())
                 .append("Word_Positions_In_this_Page", iWP.getWordPositions())
