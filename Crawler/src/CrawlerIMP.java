@@ -111,9 +111,9 @@ public class CrawlerIMP implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            DownloadPage(doc);
 
             synchronized(this) {
-                DownloadPage(doc);
                 if(childLinks!=null){
                     double baseRank=Rank.get(curLink).doubleValue();
                     double offset=baseRank/childLinks.size();
