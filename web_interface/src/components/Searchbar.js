@@ -28,7 +28,8 @@ const Searchbar = (props) => {
     if (searchText === '')
       setEmptyBarError(true);
     else {
-      props.setIsPending(true);
+      if(props.setIsPending)
+        props.setIsPending(true);
       setEmptyBarError(false);
       navigate('/search/' + searchText);
     }
