@@ -29,13 +29,13 @@ const Result = (props) => {
             </div>
               <div className="NameURL">
                 <p className="site_Name">{siteName}</p>
-                <p className="Result_URL">{Result.url}</p>
+              <p className="Result_URL" style={{ overflow: 'hidden', maxWidth: "500px", textOverflow: 'ellipsis' }}>{Result.url.substring(0, 70)}{Result.url.length>70?"...":""}</p>
               </div>
           </div>
         <h4 className="Result_title">{Result.title}</h4>
         </a>
       </div>
-      <p className="Result_description">{parse(displayText)}</p>
+      <p className="Result_description" style={{ overflow: 'hidden', textOverflow: 'ellipsis' }} >{parse(displayText.substring(0, 320))} {displayText.length>320?"...":""}</p>
   </div>
   );
 }
