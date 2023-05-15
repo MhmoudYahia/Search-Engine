@@ -116,17 +116,19 @@ public class CrawlerIMP implements Runnable {
                 DownloadPage(doc);
                 if(childLinks!=null){
                     double baseRank=Rank.get(curLink).doubleValue();
-                    System.out.println(baseRank);
+                    double offset=baseRank/childLinks.size();
                     for(String li:childLinks) {
                         if(Vis.add(li)) {
-                            Rank.put(li,0.2*baseRank);
+                            Rank.put(li,offset);
                             if(Seed.add(li));
                             {
                                 pwQ.println(li);
                                 pwQ.flush();
                             }
                         }else{
-                            Rank.put(li,Rank.get(li)+0.2*baseRank);
+                            if(li!=curLink) {
+                                Rank.put(li, Rank.get(li) + offset);
+                            }
                         }
                     }
                 }
@@ -165,7 +167,6 @@ public class CrawlerIMP implements Runnable {
             }
             BufferedWriter buff=new BufferedWriter(new FileWriter("Crawler/Files/"+id+"/"+id+".html"));
             BufferedWriter linkbuff=new BufferedWriter(new FileWriter("Crawler/Files/"+id+"/"+"link.txt"));
-            System.out.println(doc.baseUri());
             buff.write(doc.html());
             buff.close();
             linkbuff.write(doc.baseUri());
@@ -187,7 +188,7 @@ public class CrawlerIMP implements Runnable {
                 link=sc.nextLine();
                 Seed.add(link);
                 Vis.add(link);
-                Rank.put(link,200.0);
+                Rank.put(link,1000.0);
                 pwQ.println(link);
                 pwQ.flush();
             }
