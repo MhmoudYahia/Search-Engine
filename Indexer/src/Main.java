@@ -7,13 +7,16 @@ import java.util.*;
 public class Main {
     public static int lastFileOpened =0;
     public static HashMap< String, DataBaseObject> words_DBMap = new HashMap< String, DataBaseObject>();
+
+    public static HashMap< String, String> Link_Score_Map = new HashMap< String, String>();
+
    public static void main(String[] args) throws InterruptedException, IOException {
         //start from last file opened
        try {
             File current_file = new File("currentFile.txt");
             try (Scanner myScanner = new Scanner(current_file)) {
                 if (myScanner.hasNext()) {
-                    lastFileOpened = myScanner.nextInt();
+                    lastFileOpened = myScanner.nextInt() + 1;
                 }
             }
            current_file.delete();
@@ -23,8 +26,8 @@ public class Main {
         }
        //set Data base
        indexer.setDB();
-
-
+       loadScores();
+//
         System.out.println("start at file#"+lastFileOpened);
         Thread[] thrds = new Thread[Constants.NUM_THREADS];
         indexer indexer = new indexer();
@@ -67,5 +70,25 @@ public class Main {
         System.out.println("list addedd" +DBlist.size());
         System.out.println("addedd dirictly "+indexer.tempcnt);
         System.out.println("Finished Adding to the data base.");
+    }
+
+    public static void loadScores(){
+        try {
+            File Scores = new File("Crawler/Seed/Scores.txt");
+            try (Scanner myScanner = new Scanner(Scores)) {
+                while (myScanner.hasNextLine()) {
+                   String link = myScanner.nextLine();
+                    String score = "";
+                   if(myScanner.hasNextLine()) {
+                       score = myScanner.nextLine();
+
+                   }
+                   Link_Score_Map.put( link, score);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 }

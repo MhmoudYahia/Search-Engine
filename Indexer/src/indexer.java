@@ -47,33 +47,6 @@ public class indexer implements Runnable {
     public static boolean updateOldDataBasePhase = false;
     public static int fileCnt = 0;
 
-
-    //    public static void main(String[] args) throws Exception {
-//
-//        Thread thrds[] = new Thread[Constants.NUM_THREADS];
-//        indexer indxer = new indexer();
-//        for (int i = 0; i < Constants.NUM_THREADS; i++) {
-//            thrds[i] = new Thread(indxer);
-//            thrds[i].setName(String.valueOf(i));
-//            thrds[i].start();
-//        }
-//        for (int i = 0; i < Constants.NUM_THREADS; i++) {
-//            thrds[i].join();
-//        }
-//        System.out.println("start Adding (our DBMap) to the data base.");
-//        List<DBObject> DBlist = new ArrayList<>();
-//        for (Map.Entry<String, DataBaseObject> entry : words_DBMap.entrySet()) {
-//            entry.getValue().CalculateIDF(documentCount);
-//            DBObject doc = entry.getValue().convertToDocument();
-//            DBlist.add(doc);
-//        }
-//
-//        //set Data base
-//        indexer.setDB();
-//        webpagesCollection.insertMany(DBlist);
-//        webpagesCollection.insertOne(new BasicDBObject("docCnt", documentCount));
-//        System.out.println("Finished Adding to the data base.");
-//    }
     public static void setDB() {
 
         mongoClient = new MongoClient(Constants.DATABASE_HOST_ADDRESS, Constants.DATABASE_PORT_NUMBER);
@@ -111,29 +84,6 @@ public class indexer implements Runnable {
 
         int th_id = Integer.valueOf(Thread.currentThread().getName());
         int current_Index = th_id;
-
-//        // current index file read & write
-//        BufferedWriter writer = null;
-//        try {
-//            writer = new BufferedWriter(new FileWriter("currentindex/" + th_id + ".txt", true));
-//            writer.close();
-//        } catch (IOException e1) {
-//            e1.printStackTrace();
-//        }
-
-        // get current_index
-//        try {
-//            File currentIndex = new File("currentindex/" + th_id + ".txt");
-//            try (Scanner myScanner = new Scanner(currentIndex)) {
-//                if (myScanner.hasNext()) {
-//                    current_Index = myScanner.nextInt();
-//                }
-//            }
-//            currentIndex.delete();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("An error occurred.");
-//            e.printStackTrace();
-//        }
 
         // load stop words
         String stopWords = loadStopWords();
@@ -184,6 +134,7 @@ public class indexer implements Runnable {
                             index++;
                         }
                     }
+
                     for (String str : originalWords) {
                         if (wordsHashMap.containsKey(str)) {
                             wordsHashMap.get(str).addPosition(words_i);
@@ -196,11 +147,7 @@ public class indexer implements Runnable {
                     //parse title & headings
                     doc = Jsoup.parse(htmlFile, "UTF-8");
                     title = doc.title();
-//                    String[] heads = new String[3];
-//                    for (int i = 0; i < 3; i++) {
-//                        Elements h = doc.getElementsByTag("h" + String.valueOf(i + 1));
-//                        heads[i] = Jsoup.parse(h.toString()).text();
-//                    }
+
                     // Find the <meta> tag with the name attribute set to "description"
                     if(doc.select("meta[name=description]").size() > 0) {
                         Element meta = doc.select("meta[name=description]").first();
@@ -210,21 +157,19 @@ public class indexer implements Runnable {
                             desc = meta.attr("content");
                         }
                     }
-//                    else{
-//                        Elements elements= doc.getElementsContainingOwnText(stemmedToNonStemmedMap.get(entry.getKey()));
-//                        if(elements.size() > 0) {
-//                            Element descr = doc.getElementsContainingOwnText(stemmedToNonStemmedMap.get(entry.getKey())).get(0).clearAttributes();
-//                            desc = Jsoup.parse(descr.toString()).text();
-//                        }
-//                    }
-                    //headings
-                    Elements elements = doc.select("h1, h2, h3, h4, h5, h6");
+                    // get elements
+                    Elements elements = doc.select("h1, h2, h3, h4, h5, h6,a,button,meta");
                     String h1Text = "";
                     String h2Text = "";
                     String h3Text = "";
                     String h4Text = "";
                     String h5Text = "";
                     String h6Text = "";
+
+                    String aText ="";
+                    String buttonText ="";
+                    String metaText ="";
+
 
 
                     for (Element element : elements) {
@@ -248,6 +193,15 @@ public class indexer implements Runnable {
                         else if (tagName.equals("h6")) {
                             h6Text += text;
                         }
+                        else if (tagName.equals("a")) {
+                            aText += text;
+                        }
+                        else if (tagName.equals("button")) {
+                            buttonText += text;
+                        }
+                        else if (tagName.equals("meta")) {
+                            metaText += text;
+                        }
                     }
 
                     h1Text = processStringWithoutStemming(h1Text,stopWords);
@@ -256,6 +210,12 @@ public class indexer implements Runnable {
                     h4Text = processStringWithoutStemming(h4Text,stopWords);
                     h5Text = processStringWithoutStemming(h5Text,stopWords);
                     h6Text = processStringWithoutStemming(h6Text,stopWords);
+                    aText = processStringWithStemming(aText,stopWords);
+                    metaText= processStringWithStemming(metaText,stopWords);
+                    buttonText = processStringWithStemming(buttonText,stopWords);
+
+
+
                     String titleText = processStringWithoutStemming(title, stopWords);
 
                     //loop on all words of this link
@@ -265,6 +225,11 @@ public class indexer implements Runnable {
                             break;
                         }
                         if(entry.getKey().length() <= 2 && !isNumeric(entry.getKey())){
+                            continue;
+                        }
+
+                        if(isContain( aText,entry.getKey())||isContain( metaText,entry.getKey())||isContain( buttonText,entry.getKey())){
+
                             continue;
                         }
 
