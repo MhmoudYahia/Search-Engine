@@ -1,10 +1,9 @@
 
 import com.mongodb.*;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,14 +15,16 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
-
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import com.mongodb.client.model.IndexOptions;
 import com.mongodb.client.model.Indexes;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.tartarus.snowball.ext.porterStemmer;
 
 /*
  * @author mahmoud
@@ -74,8 +75,8 @@ public class indexer implements Runnable {
 //        System.out.println("Finished Adding to the data base.");
 //    }
     public static void setDB() {
-        MongoClientURI clientURI = new MongoClientURI(Constants.DATABASE_URI);
-        mongoClient = new MongoClient(clientURI);
+
+        mongoClient = new MongoClient(Constants.DATABASE_HOST_ADDRESS, Constants.DATABASE_PORT_NUMBER);
         database = mongoClient.getDB(Constants.DATABASE_NAME);
         if(Main.lastFileOpened == 1) {
             System.out.println("starting new data base.");
@@ -150,8 +151,6 @@ public class indexer implements Runnable {
 
                     String OriginalStr = processStringWithoutStemming(ParsedStr, stopWords);
                     String StemmedStr = processStringWithStemming(ParsedStr, stopWords);
- //                   String nonStemmedStr = processStringWithoutStemming(ParsedStr, stopWords);
- //                   String[] nonStmdWords = nonStemmedStr.split(" ");
 
                     int words_i = 0;
                     String linkURL = "";
@@ -162,24 +161,33 @@ public class indexer implements Runnable {
                     try (Scanner myScanner = new Scanner(linkFile)) {
                         while (myScanner.hasNext()) linkURL += myScanner.nextLine();
                     }
-                               // linkFile.delete();
                     } catch (FileNotFoundException e) {
                         System.out.println("An error occurred.");
                         e.printStackTrace();
                     }
 
-//                   System.out.println("URL#"+current_Index +" : "+linkURL);
                     String title = "";
                     String desc = "";
                     int score = 0;
                     Document doc = null;
                     // word => page
-                    String stemmedWords[] = StemmedStr.split(" ");
-                    for (String str : OriginalStr.split(" ")) {
+                    String[] stemmedWords = StemmedStr.split(" ");
+                    String[] originalWords = OriginalStr.split(" ");
+                    if(stemmedWords.length != originalWords.length)
+                    {
+                        int index = 0;
+                        for (String str:
+                             originalWords) {
+                            System.out.print(originalWords[index]);
+                            System.out.print(" ");
+                            System.out.print(stemmedWords[index] + "\n");
+                            index++;
+                        }
+                    }
+                    for (String str : originalWords) {
                         if (wordsHashMap.containsKey(str)) {
                             wordsHashMap.get(str).addPosition(words_i);
                         } else {
-//                            stemmedToNonStemmedMap.put(str, nonStmdWords[words_i]);
                             wordsHashMap.put(str, new IndexedWebPage(linkURL, words_i, stemmedWords[words_i]));
                         }
                         words_i++;
@@ -256,7 +264,7 @@ public class indexer implements Runnable {
                         if (entry.getKey() == null || "".equals(entry.getKey())) {
                             break;
                         }
-                        if( isNumeric(entry.getKey()) || entry.getKey().length() == 1){
+                        if(entry.getKey().length() <= 2 && !isNumeric(entry.getKey())){
                             continue;
                         }
 
@@ -353,28 +361,41 @@ public class indexer implements Runnable {
     //return a clean, preprocessed and stemmed string
     public static String processStringWithStemming(String txt, String stopWords) {
 
-        String processd_txt = "";
+        StringBuilder processd_txt = new StringBuilder();
         txt = processStringWithoutStemming(txt, stopWords);
-//        System.out.println("non stemmed: "+txt);
-        porterStemmer stemmer = new porterStemmer();
 
-        for (String iterator : txt.split(" ")) {
-            stemmer.setCurrent(iterator);
-            stemmer.stem();
-            String stemed= stemmer.getCurrent();
-            processd_txt += stemed + " ";
-//            System.out.println("stemmed=> "+stemed+"   non stemmed=> "+iterator);
+        Analyzer analyzer = new EnglishAnalyzer();
+
+        try (TokenStream stream = analyzer.tokenStream(null, new StringReader(txt))) {
+            stream.reset();
+            CharTermAttribute termAttribute = stream.addAttribute(CharTermAttribute.class);
+
+            while (stream.incrementToken()) {
+                String stemed = termAttribute.toString();
+                processd_txt.append(stemed).append(" ");
+            }
+
+            stream.end();
+        } catch (IOException e) {
+            System.out.println("An error occurred in processStringWithStemming.");
         }
-//        System.out.println("stemmed: "+ processd_txt);
-        return processd_txt;
+
+        return processd_txt.toString();
     }
 
     public static String processStringWithoutStemming(String txt, String stopWords) {
-
+        if(txt.isBlank())
+            return "";
         String processd_txt = "";
-        txt = txt.replaceAll("[^a-zA-Z0-9]", "");
+        txt = txt.replaceAll("[^a-zA-Z0-9 ]", "");
+        txt = txt.replaceAll("\\b(?=\\w*\\d)(?=\\w*[a-zA-Z])\\w+\\b", "");
+        //txt = txt.replaceAll("\\b(?=.*\\d)(?=.*[a-zA-Z])[\\w\\d]+\\b", "");
         txt = txt.replaceAll("\\s+", " ");
-        txt = txt.toLowerCase();
+        if(txt.isBlank())
+            return "";
+        if(txt.charAt(0) == ' ')
+            txt = txt.substring(1);
+        txt = txt.toLowerCase();                                    //
         processd_txt = txt.replaceAll("\\b(" + stopWords + ")\\b\\s?", "");  // this wrapper for (word1 | word2 | ....)
         return processd_txt;
     }
@@ -410,6 +431,7 @@ public class indexer implements Runnable {
         }
         return true;
     }
+
     public static boolean containsCharsAndNumbers(String str) {
         boolean hasChars = false;
         boolean hasNumbers = false;
