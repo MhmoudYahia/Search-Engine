@@ -23,7 +23,9 @@ public class IndexedWebPage {
     String title;
     String disc;
 
-    String paragraph = "NOT A PARAGRAPH";
+    String stemmedWord;
+
+    String paragraph = "";
 
     // positions of this word in this page   (word => pages)
     ArrayList<Integer> WordPositions;
@@ -33,11 +35,12 @@ public class IndexedWebPage {
 
     }
 
-    public IndexedWebPage(String url, int first_pos) {
+    public IndexedWebPage(String url, int first_pos, String stemmed) {
         this.TF = 1;
         this.url = url;
         this.WordPositions = new ArrayList<>();
         this.WordPositions.add(first_pos);
+        this.stemmedWord = stemmed;
     }
 
     public void setScore(int s ){
@@ -103,5 +106,11 @@ public class IndexedWebPage {
                 .append("Word_Positions_In_this_Page", iWP.getWordPositions())
                 .append("Page_Title", iWP.getTitle())
                 .append("Page_Description", iWP.getDisc());
+    }
+    public void setStemmedWord(String stemmedWord) {
+        this.stemmedWord = stemmedWord;
+    }
+    public String getStemmedWord() {
+        return stemmedWord;
     }
 }

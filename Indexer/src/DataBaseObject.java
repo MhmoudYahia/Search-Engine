@@ -18,12 +18,14 @@ import java.util.ArrayList;
 public final class DataBaseObject {
 
     String word;
-    double idf;
+
+    String stemmedWord;
     int cnt = 0;
     ArrayList<DBObject> pageData = new ArrayList<>();
 
     public DataBaseObject(String w, IndexedWebPage wp) {
         this.setWord(w);
+        this.setStemmedWord(wp.getStemmedWord());
         this.addPage(wp);
     }
 
@@ -35,25 +37,20 @@ public final class DataBaseObject {
         this.word = w;
     }
 
+    public void setStemmedWord(String stemmedWord) {
+        this.stemmedWord = stemmedWord;
+    }
+
     public void addPage(IndexedWebPage indexerdWP) {
         this.pageData.add(IndexedWebPage.toDocument(indexerdWP));
         cnt++;
     }
 
-    /*
-     * The IDF of a term is calculated as the logarithm of the total number of documents
-     * in the collection divided by the number of documents that contain the term. The formula for IDF is
-     * IDF(term) = log(N / df(term))
-     */
-    public void CalculateIDF(int tot) {
-        this.idf = (double) Math.log(tot / this.cnt);
-    }
-
     public DBObject convertToDocument() {
 
         DBObject doc = new BasicDBObject("Word", this.word)
+                .append("stemmedWord", this.stemmedWord)
                 .append("Total_Apperance_in_All_Pages", this.cnt)
-//                .append("IDF", this.idf)
                 .append("Pages_Containing_This_Word", this.pageData);
         return doc;
     }

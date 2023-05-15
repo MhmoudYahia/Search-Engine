@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Crawler/Crawler.iml" filepath="$PROJECT_DIR$/Crawler/Crawler.iml" />
       <module fileurl="file://$PROJECT_DIR$/Indexer/Indexer.iml" filepath="$PROJECT_DIR$/Indexer/Indexer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/Search-Engine.iml" filepath="$PROJECT_DIR$/.idea/Search-Engine.iml" />
     </modules>
   </component>
 </project>

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import './Home.css'
 import * as React from 'react';
-import logo from './web-crawler256.png'
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
@@ -29,6 +28,8 @@ const Searchbar = (props) => {
     if (searchText === '')
       setEmptyBarError(true);
     else {
+      if(props.setIsPending && searchText !==props.target)
+        props.setIsPending(true);
       setEmptyBarError(false);
       navigate('/search/' + searchText);
     }
@@ -40,7 +41,8 @@ const Searchbar = (props) => {
     }
   }
   const handleVoiceClick=(e)=>{
-    SpeechRecognition.startListening({ language: ['ar-SA', 'en-US'] });
+    resetTranscript();
+    SpeechRecognition.startListening({ continuous: true, interimResults: true,language: ['en-US'] });
     setIsVoiceClicked(true);
   }
   return ( <>
@@ -78,7 +80,7 @@ const Searchbar = (props) => {
     <div className="search_btn">
       <Button  onClick={handleSearchClick} variant="contained">Search</Button>
     </div>
-    {isVoiceClicked ? <VoiceAlert setSearchText={setSearchText} transcript={transcript} SpeechRecognition={SpeechRecognition} close={setIsVoiceClicked} />:<></>}
+    {isVoiceClicked ? <VoiceAlert listening={listening} setSearchText={setSearchText} transcript={transcript} SpeechRecognition={SpeechRecognition} close={setIsVoiceClicked} />:<></>}
   </> );
 }
  

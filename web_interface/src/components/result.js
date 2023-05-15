@@ -3,18 +3,20 @@ import parse from 'html-react-parser'
 import './ResultCard.css'
 
 const Result = (props) => {
-  const searchText = props.target;
+  var searchText = props.target;
   const Result = props.result;
+  searchText = searchText.replaceAll("\"", "");
   const targetWords = searchText.split(" ");
-
+  var displayText =Result.paragraph?Result.paragraph:Result.description;
   var parser = document.createElement('a');
   parser.href = Result.url;
   var siteName=parser.hostname;
   const ORIGIN=parser.origin;
 
   targetWords.forEach(Word => {
+  Word="\\b"+Word+"\\b";
   var regEx=new RegExp(Word,"ig");
-  Result.description=Result.description.replace(regEx,"<strong>"+Word+"</strong>")
+    displayText = displayText.replace(regEx,(match)=>"<strong>"+match+"</strong>")
 });
 
   return ( 
@@ -33,7 +35,7 @@ const Result = (props) => {
         <h4 className="Result_title">{Result.title}</h4>
         </a>
       </div>
-    <p className="Result_description">{parse(Result.description)}</p>
+      <p className="Result_description">{parse(displayText)}</p>
   </div>
   );
 }

@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import './Home.css'
 import { useNavigate } from "react-router-dom"
-import logo from './goat (2).png'
+import logo from './Photos/goat (2).png'
 import Searchbar from "./Searchbar";
 
 
@@ -19,7 +19,7 @@ const Navbar = (props) => {
             <h4 style={{
               display: 'flex', alignItems: 'center', fontFamily: 'Comfortaa', fontSize: '27px', fontWeight: '700', }}>GOAT</h4>
           </div>
-          <Searchbar target={props.target} />
+          <Searchbar setIsPending={props.setIsPending} target={props.target} />
         </Toolbar>
       </Container>
     </AppBar>

@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="Libraries">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Libraries/bson-3.6.3-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/mongodb-driver-3.6.3-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/mongo-java-driver-3.8.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/jsoup-1.15.4-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/jsoup-1.15.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/mongodb-driver-3.6.3-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/snowball-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/bson-3.6.3-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/jsoup-1.15.4-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/bson-3.6.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
