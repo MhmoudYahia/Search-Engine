@@ -375,26 +375,6 @@ public class indexer implements Runnable {
         return true;
     }
 
-    public static boolean containsCharsAndNumbers(String str) {
-        boolean hasChars = false;
-        boolean hasNumbers = false;
-
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (Character.isLetter(c)) {
-                hasChars = true;
-            } else if (Character.isDigit(c)) {
-                hasNumbers = true;
-            }
-
-            if (hasChars && hasNumbers) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     private static boolean isContain(String source, String subItem){
         String pattern = "\\b"+subItem+"\\b";
         Pattern p=Pattern.compile(pattern);

@@ -3,20 +3,21 @@ package com.goat.searchengine.api.controller;
 import com.goat.searchengine.api.document.WordDocument;
 import com.goat.searchengine.api.model.Query;
 import com.goat.searchengine.api.repository.Repository;
-import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.beans.PropertyEditorSupport;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.StringReader;
 import java.lang.Math;
 import java.util.*;
-import org.tartarus.snowball.ext.porterStemmer;
 
 
 @RestController
@@ -39,25 +40,44 @@ public class QueryController {
         return true;
     }
 
+    //return a clean, preprocessed and stemmed string
     public static String processStringWithStemming(String txt, String stopWords) {
 
-        String processd_txt = "";
+        StringBuilder processd_txt = new StringBuilder();
         txt = processStringWithoutStemming(txt, stopWords);
-        porterStemmer stemmer = new porterStemmer();
 
-        for (String iterator : txt.split(" ")) {
-            stemmer.setCurrent(iterator);
-            stemmer.stem();
-            String stemed= stemmer.getCurrent();
-            processd_txt += stemed + " ";
+        Analyzer analyzer = new EnglishAnalyzer();
+
+        try (TokenStream stream = analyzer.tokenStream(null, new StringReader(txt))) {
+            stream.reset();
+            CharTermAttribute termAttribute = stream.addAttribute(CharTermAttribute.class);
+
+            while (stream.incrementToken()) {
+                String stemed = termAttribute.toString();
+                processd_txt.append(stemed).append(" ");
+            }
+
+            stream.end();
+        } catch (IOException e) {
+            System.out.println("An error occurred in processStringWithStemming.");
         }
-        return processd_txt;
-    }
-    public static String processStringWithoutStemming(String txt, String stopWords) {
 
+        return processd_txt.toString();
+    }
+
+    public static String processStringWithoutStemming(String txt, String stopWords) {
+        if(txt.isBlank())
+            return "";
         String processd_txt = "";
-        txt = txt.replaceAll("[^a-zA-Z0-9_ ]", "");
+        txt = txt.replaceAll("[^a-zA-Z0-9 ]", "");
+        txt = txt.replaceAll("\\b\\w{16,}\\b", "");
+        txt = txt.replaceAll("\\b(?=\\w*\\d)(?=\\w*[a-zA-Z])\\w+\\b", "");
+        //txt = txt.replaceAll("\\b(?=.*\\d)(?=.*[a-zA-Z])[\\w\\d]+\\b", "");
         txt = txt.replaceAll("\\s+", " ");
+        if(txt.isBlank())
+            return "";
+        if(txt.charAt(0) == ' ')
+            txt = txt.substring(1);
         txt = txt.toLowerCase();                                    //
         processd_txt = txt.replaceAll("\\b(" + stopWords + ")\\b\\s?", "");  // this wrapper for (word1 | word2 | ....)
         return processd_txt;
