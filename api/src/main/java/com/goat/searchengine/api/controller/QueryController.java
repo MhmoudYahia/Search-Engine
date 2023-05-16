@@ -222,7 +222,7 @@ public class QueryController {
                     String url = (String) obj.get("Page_URL");
                     double popularity = 0;
                     if((String)obj.get("Popularity") != null)
-                        popularity = Double.parseDouble((String)obj.get("Popularity"));
+                        popularity = Double.parseDouble((String)obj.get("Popularity")) / 10;
                     double tf = (double) obj.get("Normalized_TF");
                     int tag_score = (int)obj.get("Score");
 
@@ -240,8 +240,6 @@ public class QueryController {
                             continue;
                         obj.put("count", (int) current_obj.get("count") + 1);
                         current_obj.put("count",(int) current_obj.get("count") + 1);
-                        if((int)obj.get("count") == 2)
-                            System.out.println(word);
                         String current_paragraph = (String)current_obj.get("<p>");
                         Pair<DBObject, Double> pair;
                         if(current_paragraph.equals(""))
@@ -324,7 +322,7 @@ public class QueryController {
                     double tf = (double) obj.get("Normalized_TF");
                     double popularity = 0;
                     if((String)obj.get("Popularity") != null)
-                        popularity = Double.parseDouble((String)obj.get("Popularity"));
+                        popularity = Double.parseDouble((String)obj.get("Popularity")) / 10;
                     int tag_score = (int)obj.get("Score");
                     double tf_idf = tf * idf;
                     double final_score = tf_idf * (1 + tag_score + popularity);

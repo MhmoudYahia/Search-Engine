@@ -41,7 +41,7 @@ public class Main {
         //record last file opened
        BufferedWriter writer = null;
        try {
-           writer = new BufferedWriter(new FileWriter("currentFile.txt", true));
+           writer = new BufferedWriter(new FileWriter("currentFile.txt", false));
            writer.write(String.valueOf(indexer.fileCnt - 1));
            writer.close();
        } catch (IOException e1) {
@@ -65,7 +65,7 @@ public class Main {
             BasicDBObject update = new BasicDBObject("$inc", new BasicDBObject("Doc_Cnt", indexer.fileCnt));
             indexer.webpagesCollection.update(new BasicDBObject("info","Doc_meta_data" ), update);
         }
-       indexer.webpagesCollection.insert(DBlist);
+        indexer.webpagesCollection.insert(DBlist);
         System.out.println("list addedd" +DBlist.size());
         System.out.println("addedd dirictly "+indexer.tempcnt);
         System.out.println("Finished Adding to the data base.");

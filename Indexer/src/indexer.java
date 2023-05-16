@@ -49,9 +49,9 @@ public class indexer implements Runnable {
 
     public static void setDB() {
 
-        //mongoClient = new MongoClient(Constants.DATABASE_HOST_ADDRESS, Constants.DATABASE_PORT_NUMBER);
-        MongoClientURI clientURI = new MongoClientURI(Constants.DATABASE_URI);
-        mongoClient = new MongoClient(clientURI);
+        mongoClient = new MongoClient(Constants.DATABASE_HOST_ADDRESS, Constants.DATABASE_PORT_NUMBER);
+        //MongoClientURI clientURI = new MongoClientURI(Constants.DATABASE_URI);
+        //mongoClient = new MongoClient(clientURI);
         database = mongoClient.getDB(Constants.DATABASE_NAME);
         if(Main.lastFileOpened == 1) {
             System.out.println("starting new data base.");
@@ -168,11 +168,6 @@ public class indexer implements Runnable {
                     String h5Text = "";
                     String h6Text = "";
 
-                    String aText ="";
-                    String buttonText ="";
-                    String metaText ="";
-
-
 
                     for (Element element : elements) {
                         String tagName = element.tagName();
@@ -195,15 +190,6 @@ public class indexer implements Runnable {
                         else if (tagName.equals("h6")) {
                             h6Text += text;
                         }
-                        else if (tagName.equals("a")) {
-                            aText += text;
-                        }
-                        else if (tagName.equals("button")) {
-                            buttonText += text;
-                        }
-                        else if (tagName.equals("meta")) {
-                            metaText += text;
-                        }
                     }
 
                     h1Text = processStringWithoutStemming(h1Text,stopWords);
@@ -212,12 +198,6 @@ public class indexer implements Runnable {
                     h4Text = processStringWithoutStemming(h4Text,stopWords);
                     h5Text = processStringWithoutStemming(h5Text,stopWords);
                     h6Text = processStringWithoutStemming(h6Text,stopWords);
-                    aText = processStringWithStemming(aText,stopWords);
-                    metaText= processStringWithStemming(metaText,stopWords);
-                    buttonText = processStringWithStemming(buttonText,stopWords);
-
-
-
                     String titleText = processStringWithoutStemming(title, stopWords);
 
                     //loop on all words of this link
@@ -227,11 +207,6 @@ public class indexer implements Runnable {
                             break;
                         }
                         if(entry.getKey().length() <= 2 && !isNumeric(entry.getKey())){
-                            continue;
-                        }
-
-                        if(isContain( aText,entry.getKey())||isContain( metaText,entry.getKey())||isContain( buttonText,entry.getKey())){
-
                             continue;
                         }
 
